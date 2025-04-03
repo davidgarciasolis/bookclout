@@ -10,12 +10,12 @@ main {
 
 /* Estilo específico para el encabezado h1 dentro del main */
 main h1 {
-    margin: 0; /* Elimina márgenes adicionales para el h1 */
+    margin: 10px; /* Elimina márgenes adicionales para el h1 */
     font-size: 24px; /* Ajusta el tamaño del encabezado */
 }
 
-main button {
-    background-color: #007bff; /* Color de fondo del botón */
+main h1 button {
+    background-color: green; /* Color de fondo del botón */
     color: #fff; /* Color del texto */
     border: none; /* Elimina el borde del botón */
     padding: 10px 15px; /* Espaciado interno */
