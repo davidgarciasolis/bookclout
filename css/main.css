@@ -1,0 +1,54 @@
+/* El contenedor principal del contenido dentro de la etiqueta <main> */
+main {
+    display: flex; /* Utiliza un contenedor flexible para gestionar los elementos internos */
+    flex-direction: column; /* Alinea los elementos (h1 y tabla) en una columna vertical */
+    align-items: center; /* Centra los elementos horizontalmente dentro del contenedor */
+    width: 100%; /* Ocupa el 100% del ancho disponible */
+    max-width: 1200px; /* Limita el ancho máximo del contenedor para mejor legibilidad */
+    margin: 0 auto; /* Centra el contenedor dentro de la página */
+}
+
+/* Estilo específico para el encabezado h1 dentro del main */
+main h1 {
+    margin: 0; /* Elimina márgenes adicionales para el h1 */
+    font-size: 24px; /* Ajusta el tamaño del encabezado */
+}
+
+main button {
+    background-color: #007bff; /* Color de fondo del botón */
+    color: #fff; /* Color del texto */
+    border: none; /* Elimina el borde del botón */
+    padding: 10px 15px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+    font-size: 16px; /* Ajusta el tamaño de la fuente */
+}
+
+/* La tabla dentro del main */
+main table {
+    width: 100%; /* Hace que la tabla ocupe todo el ancho del contenedor */
+    border-collapse: collapse; /* Combina los bordes de las celdas para un diseño más limpio */
+    margin-top: 0; /* Asegura que no haya margen superior innecesario */
+}
+
+/* Estilo para las celdas y encabezados de la tabla */
+main th, main td {
+    border: 1px solid #ddd; /* Agrega un borde gris claro alrededor de cada celda */
+    padding: 10px; /* Agrega espacio interior en las celdas para mayor legibilidad */
+    text-align: left; /* Alinea el texto a la izquierda */
+}
+
+/* Estilo para los encabezados de la tabla */
+main th {
+    background-color: #f4f4f4; /* Aplica un color de fondo claro a los encabezados */
+}
+
+/* Alterna el color de fondo de las filas para mayor claridad visual */
+main tr:nth-child(even) {
+    background-color: #f9f9f9; /* Aplica un color de fondo claro a las filas pares */
+}
+
+/* Cambia el color de fondo al pasar el ratón sobre una fila */
+main tr:hover {
+    background-color: #f1f1f1; /* Mejora la interacción visual con un efecto hover */
+}

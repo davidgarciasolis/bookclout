@@ -1,0 +1,15 @@
+/* Footer */
+footer {
+    background-color: black; /* Color de fondo */
+    color: whitesmoke; /* Color del texto */
+    text-align: center; /* Centra el texto */
+    position: fixed; /* Fija el footer al final de la página */
+    bottom: 0; /* Posiciona el footer al final */
+    width: 100%; /* Ancho completo */
+    padding: 10px/* Espacio entre el borde y el contenido */
+}
+
+
+footer h1 {
+    margin: 0; /* Sin margen */
+}
