@@ -18,8 +18,6 @@ include '../autenticacion/check_sesion.php';
         <?php include 'includes/header.php';?>
 
         <main>
-            <!-- Título principal de la página -->
-            <h1>Alta de Usuario</h1>
             <?php
             // Comprobar si existe un mensaje en la sesión para mostrar al usuario
             if (isset($_SESSION['mensaje'])) {
@@ -40,6 +38,8 @@ include '../autenticacion/check_sesion.php';
             ?>
             <!-- Formulario para crear un nuevo usuario -->
             <form action="php/procesar_alta_usuario.php" method="POST">
+                <!-- Título principal de la página -->
+                <h1>Alta de Usuario</h1>
                 <!-- Campo para el nombre del usuario -->
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" maxlength="100" required>

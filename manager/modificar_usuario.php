@@ -60,8 +60,8 @@ if (isset($_POST['email'])) {
             <input type="email" name="email" id="email" value="<?php echo htmlspecialchars($usuario['email']); ?>" required>
             
             <label for="admin">¿Es administrador? <input type="checkbox" name="admin" id="admin" <?php echo $usuario['admin'] ? 'checked' : ''; ?>></label>
-            <br>
-            
+            <br><br>
+
             <button type="submit">Actualizar Usuario</button>
         </form>
     </main>

@@ -99,13 +99,15 @@ main form {
 /* Estiliza los inputs y labels dentro del formulario */
 main form label {
     font-weight: bold; /* Resalta el texto */
-    display: block; /* Coloca cada etiqueta en una línea separada */
     margin-bottom: 5px; /* Espaciado inferior */
 }
 
 main form input[type="text"],
 main form input[type="email"],
-main form input[type="password"] {
+main form input[type="password"],
+main form input[type="date"],
+main form input[type="url"],
+main form input[type="textarea"] {
     width: 100%; /* Haz que los campos ocupen todo el ancho del formulario */
     padding: 10px; /* Espaciado interno */
     margin-bottom: 15px; /* Espaciado inferior */
