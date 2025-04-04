@@ -9,11 +9,31 @@
 </head>
 <body>
         <!-- header -->
-        <?php include 'header.php';?>
+        <?php include 'includes/header.php';?>
+
     
         <main>
             <h1>Alta de Usuario</h1>
-            <form action="procesar_usuario.php" method="POST">
+            <?php
+
+            if (isset($_SESSION['mensaje'])) {
+                $mensaje = $_SESSION['mensaje'];
+                $tipo = $_SESSION['mensaje_tipo'];
+                
+                // Mostrar el mensaje
+                if ($tipo == 'exito') {
+                    echo '<p style="color: green;">' . $mensaje . '</p>';
+                } elseif ($tipo == 'error') {
+                    echo '<p style="color: red;">' . $mensaje . '</p>';
+                }
+
+                // Limpiar el mensaje de la sesión
+                unset($_SESSION['mensaje']);
+                unset($_SESSION['mensaje_tipo']);
+            }
+            ?>
+
+            <form action="php/procesar_alta_usuario.php" method="POST">
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" maxlength="100" required>
                 <br><br>
@@ -35,6 +55,6 @@
         </main>
 
         <!-- footer -->
-        <?php include '../footer.php';?>
+        <?php include 'includes/footer.php';?>
 </body>
 </html>

@@ -11,7 +11,7 @@
 </head>
 <body>
     <!-- header -->
-    <?php include 'header.php';?>
+    <?php include 'includes/header.php';?>
 
     <main>
         <h1>Mi perfil</h1>
@@ -19,6 +19,6 @@
     </main>
 
     <!-- footer -->
-    <?php include '../footer.php';?>
+    <?php include 'includes/footer.php';?>
 </body>
 </html>
