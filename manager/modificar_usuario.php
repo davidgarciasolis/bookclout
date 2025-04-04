@@ -50,8 +50,8 @@ if (isset($_POST['email'])) {
     <?php include 'includes/header.php';?>
 
     <main>
-        <h1>Modificar Usuario: <?php echo htmlspecialchars($_POST['email']); ?></h1>
         <form action="php/procesar_modificar_usuario.php" method="POST">
+            <h1>Modificar Usuario: <?php echo htmlspecialchars($_POST['email']); ?></h1>
             <input type="hidden" name="email_actual" value="<?php echo htmlspecialchars($usuario['email']); ?>">
             <label for="nombre">Nombre:</label>
             <input type="text" name="nombre" id="nombre" value="<?php echo htmlspecialchars($usuario['nombre']); ?>" required>
@@ -59,8 +59,8 @@ if (isset($_POST['email'])) {
             <label for="email">Email:</label>
             <input type="email" name="email" id="email" value="<?php echo htmlspecialchars($usuario['email']); ?>" required>
             
-            <label for="admin">¿Es administrador?</label>
-            <input type="checkbox" name="admin" id="admin" <?php echo $usuario['admin'] ? 'checked' : ''; ?>>
+            <label for="admin">¿Es administrador? <input type="checkbox" name="admin" id="admin" <?php echo $usuario['admin'] ? 'checked' : ''; ?>></label>
+            <br>
             
             <button type="submit">Actualizar Usuario</button>
         </form>
