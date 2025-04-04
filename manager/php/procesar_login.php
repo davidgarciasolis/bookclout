@@ -1,6 +1,6 @@
 <?php
 session_start(); // Inicia la sesión para manejar datos entre páginas
-require 'conexion.php'; // Incluye el archivo para la conexión a la base de datos
+require '../../autenticacion/conexion.php'; // Incluye el archivo para la conexión a la base de datos
 
 // Verifica si la solicitud se realizó mediante el método POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Verifica si la contraseña proporcionada coincide con la contraseña encriptada almacenada
         if (password_verify($contraseña, $hashed_password)) {
             $_SESSION["usuario"] = $nombre; // Guarda el nombre de usuario en la sesión
-            header("Location: ../manager/inicio.php"); // Redirige al usuario a la página principal
+            header("Location: ../inicio.php"); // Redirige al usuario a la página principal
             exit(); // Finaliza la ejecución del script
         } else {
             $_SESSION["error"] = "El usuario o la contraseña es incorecta"; // Guarda un mensaje de error en la sesión
@@ -34,6 +34,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 // Redirige al usuario de vuelta a la página de inicio de sesión
-header("Location: ../manager/login.php");
+header("Location: ../login.php");
 exit(); // Finaliza la ejecución del script
 ?>

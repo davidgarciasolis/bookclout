@@ -11,8 +11,8 @@ session_start(); // Se inicia sesion para comprobar el error
 </head>
 <body>
     <!-- formulario de login -->
-     <form action="../php/procesar_login.php" method="POST">
-        <img src="../img/libro.png" alt="Logo">
+     <form action="php/procesar_login.php" method="POST">
+        <img src="../img/logo.png" alt="Logo">
         <h1>Iniciar sesion</h1>
 
         <!-- Error de inicio de session -->

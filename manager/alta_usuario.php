@@ -1,4 +1,4 @@
-<?php include '../php/check_sesion.php'; ?>
+<?php include '../autenticacion/check_sesion.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

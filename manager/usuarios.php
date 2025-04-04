@@ -1,4 +1,4 @@
-<?php include '../php/check_sesion.php'; ?>
+<?php include 'php/check_sesion.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +19,7 @@
         </h1>
 
         <?php
-        require '../php/conexion.php';
+        require '../autenticacion/conexion.php';
 
         // Consulta SQL
         $sql = "SELECT nombre, email, admin, fecha_alta FROM usuarios"; // Ajusta 'usuarios' según el nombre real de tu tabla
