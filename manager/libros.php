@@ -52,7 +52,7 @@ require '../autenticacion/check_sesion.php';
         // Si hay resultados, muestra los libros en una tabla; si no, muestra un mensaje
         if ($result->num_rows > 0) {
             echo "<table border='1'>";
-            echo "<tr><th>ISBN</th><th>Título</th><th>Autor</th><th>Editorial</th><th>Fecha Publicación</th><th>Portada</th><th>Opciones</th></tr>";
+            echo "<tr><th>ISBN</th><th>Título</th><th>Autor</th><th>Editorial</th><th>Publicación</th><th>Portada</th><th>Opciones</th></tr>";
             while($row = $result->fetch_assoc()) {
                 // Escapa caracteres especiales para prevenir ataques XSS
                 $isbnLibro = htmlspecialchars($row["isbn"]);
