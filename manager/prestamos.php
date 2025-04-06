@@ -65,9 +65,9 @@ require '../autenticacion/check_sesion.php';
                 echo "<td>$fechaPrestamo</td>";
                 echo "<td>$fechaDevolucion</td>";
                 echo "<td>
-                     <form action='modificar_prestamo.php' method='POST'>
+                     <form action='php/procesar_entrega_prestamo.php' method='POST'>
                         <input type='hidden' name='id_prestamo' value='$idPrestamo'>
-                        <button type='submit'>Modificar</button>
+                        <button type='submit'>Entregar</button>
                     </form>
                     <form action='php/procesar_eliminar_prestamo.php' method='POST' onsubmit='event.preventDefault(); confirmarEliminacion(\"$idPrestamo\", this);'>
                         <input type='hidden' name='id_prestamo' value='$idPrestamo'>
