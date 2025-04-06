@@ -16,14 +16,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fechaNueva = htmlspecialchars($_POST['fecha_publicacion']);
     $portadaNueva = $_POST['portada'] ?? null;
     $descripcionNueva = htmlspecialchars($_POST['descripcion']);
+    $unidadesNuevas = htmlspecialchars($_POST['unidades']); // Nuevo campo
 
-    // Consulta SQL para actualizar el libro
-    $sql = "UPDATE libros SET isbn = ?, titulo = ?, autor = ?, editorial = ?, fecha_publicacion = ?, portada = ?, descripcion = ? WHERE isbn = ?";
+    // Consulta SQL para actualizar el libro, incluyendo las unidades
+    $sql = "UPDATE libros SET isbn = ?, titulo = ?, autor = ?, editorial = ?, fecha_publicacion = ?, portada = ?, descripcion = ?, unidades = ? WHERE isbn = ?";
     $stmt = $conn->prepare($sql);
 
     if ($stmt) {
         // Vincula los parámetros y ejecuta la consulta
-        $stmt->bind_param('ssssssss', $isbnNuevo, $tituloNuevo, $autorNuevo, $editorialNueva, $fechaNueva, $portadaNueva, $descripcionNueva, $isbnActual);
+        $stmt->bind_param('ssssssssi', $isbnNuevo, $tituloNuevo, $autorNuevo, $editorialNueva, $fechaNueva, $portadaNueva, $descripcionNueva, $unidadesNuevas, $isbnActual);
         if ($stmt->execute()) {
             $_SESSION['mensaje'] = "Libro actualizado correctamente.";
         } else {

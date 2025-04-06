@@ -1,16 +1,13 @@
 <?php
-// Incluye el archivo que verifica la sesión del usuario
 require '../autenticacion/check_sesion.php';
-
-// Incluye la conexión a la base de datos
 require '../autenticacion/conexion.php';
 
 // Verifica si se recibió el ISBN del libro a editar
 if (isset($_POST['isbn'])) {
     $isbnLibro = htmlspecialchars($_POST['isbn']);
 
-    // Consulta SQL para obtener los datos del libro
-    $sql = "SELECT isbn, titulo, autor, editorial, fecha_publicacion, portada, descripcion FROM libros WHERE isbn = ?";
+    // Consulta SQL para obtener los datos del libro, incluyendo las unidades
+    $sql = "SELECT isbn, titulo, autor, editorial, fecha_publicacion, portada, descripcion, unidades FROM libros WHERE isbn = ?";
     $stmt = $conn->prepare($sql);
 
     if ($stmt) {
@@ -76,6 +73,10 @@ if (isset($_POST['isbn'])) {
             <textarea name="descripcion" id="descripcion" rows="4"><?php echo htmlspecialchars($libro['descripcion']); ?></textarea>
             <br><br>
 
+            <label for="unidades">Unidades:</label>
+            <input type="number" name="unidades" id="unidades" value="<?php echo htmlspecialchars($libro['unidades']); ?>" required>
+            <br><br>
+
             <button type="submit">Actualizar Libro</button>
         </form>
     </main>
@@ -83,3 +84,4 @@ if (isset($_POST['isbn'])) {
     <?php include 'includes/footer.php';?>
 </body>
 </html>
+

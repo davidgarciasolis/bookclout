@@ -1,5 +1,4 @@
 <?php 
-// Incluye un archivo PHP que verifica la sesión del usuario
 require '../autenticacion/check_sesion.php'; 
 ?>
 
@@ -9,12 +8,8 @@ require '../autenticacion/check_sesion.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Libros</title>
-    
-    <!-- Vincula un archivo CSS externo para estilizar la página -->
     <link rel="stylesheet" href="../css/styles.css">
-    
     <script>
-        // Función para confirmar antes de eliminar un libro
         function confirmarEliminacion(tituloLibro, form) {
             if (confirm(`¿Estás seguro de que quieres eliminar el libro "${tituloLibro}"?`)) {
                 form.submit();
@@ -23,44 +18,39 @@ require '../autenticacion/check_sesion.php';
     </script>
 </head>
 <body>
-    <!-- Incluye el encabezado común de la aplicación -->
     <?php include 'includes/header.php';?>
 
     <main>
         <?php
-        // Verifica si hay algún mensaje almacenado en la sesión
         if (isset($_SESSION['mensaje'])) {
             echo "<script>alert('" . htmlspecialchars($_SESSION['mensaje']) . "');</script>";
             unset($_SESSION['mensaje']);
         }
         ?>
 
-        <!-- Título principal de la página y botón para agregar un nuevo libro -->
         <h1>
             Libros
             <a href="alta_libro.php"><button>Agregar Libro</button></a>
         </h1>
 
         <?php
-        // Conexión a la base de datos
         require '../autenticacion/conexion.php';
 
-        // Consulta SQL para obtener información de los libros registrados
-        $sql = "SELECT isbn, titulo, autor, editorial, fecha_publicacion, portada, descripcion FROM libros"; 
+        // Incluye 'unidades' en la consulta SQL
+        $sql = "SELECT isbn, titulo, autor, editorial, fecha_publicacion, portada, descripcion, unidades FROM libros"; 
         $result = $conn->query($sql);
 
-        // Si hay resultados, muestra los libros en una tabla; si no, muestra un mensaje
         if ($result->num_rows > 0) {
             echo "<table border='1'>";
-            echo "<tr><th>ISBN</th><th>Título</th><th>Autor</th><th>Editorial</th><th>Publicación</th><th>Portada</th><th>Opciones</th></tr>";
+            echo "<tr><th>ISBN</th><th>Título</th><th>Autor</th><th>Editorial</th><th>Publicación</th><th>Portada</th><th>Unidades</th><th>Opciones</th></tr>";
             while($row = $result->fetch_assoc()) {
-                // Escapa caracteres especiales para prevenir ataques XSS
                 $isbnLibro = htmlspecialchars($row["isbn"]);
                 $tituloLibro = htmlspecialchars($row["titulo"]);
                 $autorLibro = htmlspecialchars($row["autor"]);
                 $editorialLibro = htmlspecialchars($row["editorial"]);
                 $fechaLibro = htmlspecialchars($row["fecha_publicacion"]);
                 $portadaLibro = htmlspecialchars($row["portada"]);
+                $unidadesLibro = htmlspecialchars($row["unidades"]);
 
                 echo "<tr>";
                 echo "<td>$isbnLibro</td>";
@@ -75,6 +65,8 @@ require '../autenticacion/check_sesion.php';
                     echo "Sin portada";
                 }
                 echo "</td>";
+                // Mostrar el número de unidades
+                echo "<td>$unidadesLibro</td>";
                 echo "<td>
                     <form action='modificar_libro.php' method='POST'>
                         <input type='hidden' name='isbn' value='$isbnLibro'>
@@ -92,12 +84,11 @@ require '../autenticacion/check_sesion.php';
             echo "<p>No hay libros registrados.</p>";
         }
 
-        // Cierra la conexión a la base de datos
         $conn->close();
         ?>
     </main>
 
-    <!-- Incluye el pie de página común de la aplicación -->
     <?php include 'includes/footer.php';?>
 </body>
 </html>
+
