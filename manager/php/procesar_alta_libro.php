@@ -3,7 +3,7 @@ require '../../autenticacion/check_sesion.php';
 require '../../autenticacion/conexion.php';
 
 try {
-    // Obtener datos del formulario
+    // Obtener datos del formulario, incluyendo el nuevo campo de unidades
     $isbn = $_POST['isbn'];
     $titulo = $_POST['titulo'];
     $autor = $_POST['autor'];
@@ -11,14 +11,15 @@ try {
     $fecha_publicacion = $_POST['fecha_publicacion'] ?? null;
     $portada = $_POST['portada'] ?? null;
     $descripcion = $_POST['descripcion'] ?? null;
+    $unidades = $_POST['unidades'] ?? 0; // Capturar las unidades, con valor predeterminado de 0
 
     // Preparar la consulta para insertar datos en la tabla 'libros'
-    $sql = "INSERT INTO libros (isbn, titulo, autor, editorial, fecha_publicacion, portada, descripcion) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO libros (isbn, titulo, autor, editorial, fecha_publicacion, portada, descripcion, unidades) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
 
     if ($stmt) {
         // Bind de parámetros
-        $stmt->bind_param("sssssss", $isbn, $titulo, $autor, $editorial, $fecha_publicacion, $portada, $descripcion);
+        $stmt->bind_param("sssssssi", $isbn, $titulo, $autor, $editorial, $fecha_publicacion, $portada, $descripcion, $unidades);
 
         // Ejecutar la consulta
         if ($stmt->execute()) {

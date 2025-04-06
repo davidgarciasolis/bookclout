@@ -62,6 +62,10 @@ include '../autenticacion/check_sesion.php';
             <textarea name="descripcion" id="descripcion" rows="4">Descripcion</textarea>
             <br><br>
 
+            <label for="unidades">Unidades:</label>
+            <input type="number" id="unidades" name="unidades" min="0" value="0" required>
+            <br><br>
+
             <button type="submit">Registrar Libro</button>
         </form>
     </main>
@@ -71,3 +75,4 @@ include '../autenticacion/check_sesion.php';
 </body>
 <script src="js/api_google_books.js"></script>
 </html>
+
