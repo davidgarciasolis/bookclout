@@ -19,6 +19,29 @@ require '../autenticacion/check_sesion.php';
                 form.submit();
             }
         }
+
+        // Ocultar o mostrar el botón "Entregar" dependiendo de la fecha de devolución
+        function actualizarVisibilidadBotonEntregar() {
+            const filas = document.querySelectorAll('table tr');
+            
+            filas.forEach(fila => {
+                const celdaFechaDevolucion = fila.querySelector('td:nth-child(5)');
+                const formEntregar = fila.querySelector('form[action="php/procesar_entrega_prestamo.php"]');
+
+                if (celdaFechaDevolucion && formEntregar) {
+                    const fechaDevolucion = celdaFechaDevolucion.textContent.trim();
+                    // Mostrar el botón solo si la fecha de devolución está vacía o es "No devuelto"
+                    if (!fechaDevolucion || fechaDevolucion === 'No devuelto') {
+                        formEntregar.style.display = 'block';
+                    } else {
+                        formEntregar.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        // Llamar la función al cargar la página
+        document.addEventListener('DOMContentLoaded', actualizarVisibilidadBotonEntregar);
     </script>
 </head>
 <body>
