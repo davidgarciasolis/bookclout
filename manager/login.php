@@ -23,8 +23,8 @@ session_start(); // Se inicia sesion para comprobar el error
             }
         ?>
 
-        <label for="nombre">Nombre:</label>
-        <input type="text" name="nombre" required>
+        <label for="email">Email:</label>
+        <input type="text" name="email" required>
         <label for="contraseña">Contraseña</label>
         <input type="password" name="contraseña" required>
         <button type="submit">Enviar</button>

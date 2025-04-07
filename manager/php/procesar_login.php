@@ -4,12 +4,12 @@ require '../../autenticacion/conexion.php'; // Incluye el archivo para la conexi
 
 // Verifica si la solicitud se realizó mediante el método POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nombre = $_POST["nombre"]; // Obtiene el nombre de usuario enviado desde el formulario
+    $email = $_POST["email"]; // Obtiene el email del usuario enviado desde el formulario
     $contraseña = $_POST["contraseña"]; // Obtiene la contraseña enviada desde el formulario
 
     // Prepara una consulta SQL para buscar la contraseña del usuario en la base de datos
-    $stmt = $conn->prepare("SELECT contraseña FROM usuarios WHERE nombre = ?");
-    $stmt->bind_param("s", $nombre); // Vincula el parámetro del nombre de usuario a la consulta
+    $stmt = $conn->prepare("SELECT contraseña FROM usuarios WHERE email = ?");
+    $stmt->bind_param("s", $email); // Vincula el parámetro del nombre de usuario a la consulta
     $stmt->execute(); // Ejecuta la consulta
     $stmt->store_result(); // Almacena el resultado de la consulta
 
@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Verifica si la contraseña proporcionada coincide con la contraseña encriptada almacenada
         if (password_verify($contraseña, $hashed_password)) {
-            $_SESSION["usuario"] = $nombre; // Guarda el nombre de usuario en la sesión
+            $_SESSION["email"] = $email; // Guarda el nombre de usuario en la sesión
             header("Location: ../inicio.php"); // Redirige al usuario a la página principal
             exit(); // Finaliza la ejecución del script
         } else {

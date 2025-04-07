@@ -42,7 +42,7 @@ require '../autenticacion/check_sesion.php';
         require '../autenticacion/conexion.php';
 
         // Consulta SQL para obtener los préstamos actuales
-        $sql = "SELECT p.id_prestamo, l.titulo AS libro, u.nombre AS usuario, p.fecha_prestamo, p.fecha_devolucion
+        $sql = "SELECT p.id_prestamo, l.titulo AS libro, email AS usuario, p.fecha_prestamo, p.fecha_devolucion
                 FROM prestamos p
                 JOIN libros l ON p.isbn = l.isbn
                 JOIN usuarios u ON p.email_usuario = u.email"; 
