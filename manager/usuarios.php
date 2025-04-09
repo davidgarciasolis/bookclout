@@ -1,6 +1,4 @@
 <?php 
-// Incluye un archivo PHP que verifica si el usuario tiene una sesión activa.
-// Esto es importante para evitar accesos no autorizados a la página.
 require '../autenticacion/check_sesion.php'; 
 ?> 
 
@@ -10,54 +8,78 @@ require '../autenticacion/check_sesion.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuarios</title>
-    
-    <!-- Vincula un archivo CSS externo para estilizar la página -->
     <link rel="stylesheet" href="../css/styles.css">
     
     <script>
-        // Función para confirmar antes de eliminar un usuario.
-        // Muestra un cuadro de diálogo con el nombre del usuario y, si se acepta, envía el formulario.
-        function confirmarEliminacion(nombreUsuario, form) {
-            if (confirm(`¿Estás seguro de que quieres eliminar al usuario ${nombreUsuario}?`)) {
-                form.submit();
-            }
+    // Variables para rastrear el estado de ordenación
+    let columnaOrdenada = -1; // Ninguna columna está ordenada inicialmente
+    let ordenAscendente = true; // Orden por defecto: ascendente
+
+    function ordenarTabla(indiceColumna) {
+        let tabla = document.getElementById("tablaUsuarios");
+        let filas = Array.from(tabla.rows).slice(1); // Ignora la fila de encabezado
+
+        // Si la misma columna se vuelve a ordenar, invertimos el orden
+        if (columnaOrdenada === indiceColumna) {
+            ordenAscendente = !ordenAscendente;
+        } else {
+            columnaOrdenada = indiceColumna; // Cambiamos a la nueva columna
+            ordenAscendente = true; // Por defecto en ascendente
         }
+
+        filas.sort((a, b) => {
+            let celdaA = a.cells[indiceColumna].textContent.trim().toLowerCase();
+            let celdaB = b.cells[indiceColumna].textContent.trim().toLowerCase();
+            if (celdaA < celdaB) {
+                return ordenAscendente ? -1 : 1;
+            }
+            if (celdaA > celdaB) {
+                return ordenAscendente ? 1 : -1;
+            }
+            return 0;
+        });
+
+        filas.forEach(fila => tabla.appendChild(fila)); // Rearranga las filas
+    }
     </script>
+
 </head>
 <body>
-    <!-- Incluye el encabezado común de la aplicación -->
     <?php include 'includes/header.php';?>
 
     <main>
         <?php
-        // Verifica si hay algún mensaje almacenado en la sesión (por ejemplo, éxito o error).
-        // Si existe, lo muestra mediante una alerta y lo elimina de la sesión para evitar redundancia.
         if (isset($_SESSION['mensaje'])) {
             echo "<script>alert('" . htmlspecialchars($_SESSION['mensaje']) . "');</script>";
             unset($_SESSION['mensaje']);
         }
         ?>
 
-        <!-- Título principal de la página y botón para agregar un nuevo usuario -->
         <h1>
             Usuarios
+             <!-- Campo de búsqueda -->
+        <input type="text" id="buscar" placeholder="Buscar en la tabla..." onkeyup="filtrarTabla()">
             <a href="alta_usuario.php"><button>Agregar Usuario</button></a>
+            
         </h1>
 
+
         <?php
-        // Conexión a la base de datos para ejecutar una consulta
         require '../autenticacion/conexion.php';
 
-        // Consulta SQL para obtener información de los usuarios registrados
         $sql = "SELECT nombre, email, admin, fecha_alta FROM usuarios"; 
         $result = $conn->query($sql);
 
-        // Si hay resultados, los muestra en una tabla; si no, muestra un mensaje informativo
         if ($result->num_rows > 0) {
-            echo "<table border='1'>";
-            echo "<tr><th>Nombre</th><th>Email</th><th>Admin</th><th>Fecha de Alta</th><th>Opciones</th></tr>";
+            echo "<table border='1' id='tablaUsuarios'>";
+            echo "<tr>
+                <th onclick='ordenarTabla(0)'>Nombre</th>
+                <th onclick='ordenarTabla(1)'>Email</th>
+                <th onclick='ordenarTabla(2)'>Admin</th>
+                <th onclick='ordenarTabla(3)'>Fecha de Alta</th>
+                <th>Opciones</th>
+            </tr>";
             while($row = $result->fetch_assoc()) {
-                // Escapa caracteres especiales para prevenir ataques XSS
                 $nombreUsuario = htmlspecialchars($row["nombre"]);
                 $emailUsuario = htmlspecialchars($row["email"]);
                 
@@ -67,13 +89,11 @@ require '../autenticacion/check_sesion.php';
                 echo "<td>" . ($row["admin"] ? 'Sí' : 'No') . "</td>";
                 echo "<td>" . htmlspecialchars($row["fecha_alta"]) . "</td>";
                 echo "<td>
-                     <form action='modificar_usuario.php' method='POST'>
-                        <!-- Incluye el correo electrónico del usuario en un campo oculto -->
+                    <form action='modificar_usuario.php' method='POST'>
                         <input type='hidden' name='email' value='$emailUsuario'>
                         <button type='submit'>Modificar</button>
                     </form>
                     <form action='php/procesar_eliminar_usuario.php' method='POST' onsubmit='event.preventDefault(); confirmarEliminacion(\"$nombreUsuario\", this);'>
-                        <!-- Incluye el correo electrónico del usuario en un campo oculto -->
                         <input type='hidden' name='email' value='$emailUsuario'>
                         <button type='submit'>Eliminar</button>
                     </form>
@@ -82,17 +102,15 @@ require '../autenticacion/check_sesion.php';
             }
             echo "</table>";
         } else {
-            // Mensaje cuando no hay usuarios registrados
             echo "<p>No hay usuarios registrados.</p>";
         }
 
-        // Cierra la conexión a la base de datos
         $conn->close();
         ?>
     </main>
 
-    <!-- Incluye el pie de página común de la aplicación -->
     <?php include 'includes/footer.php';?>
 </body>
 </html>
+
 

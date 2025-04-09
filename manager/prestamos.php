@@ -1,5 +1,4 @@
 <?php 
-// Verifica si el usuario tiene una sesión activa
 require '../autenticacion/check_sesion.php'; 
 ?> 
 
@@ -9,11 +8,14 @@ require '../autenticacion/check_sesion.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Préstamos</title>
-    
     <link rel="stylesheet" href="../css/styles.css">
-    
+
     <script>
-        // Función para confirmar antes de eliminar un préstamo
+        // Variables para el estado de ordenación
+        let columnaOrdenada = -1;
+        let ordenAscendente = true;
+
+        // Confirmación antes de eliminar un préstamo
         function confirmarEliminacion(idPrestamo, form) {
             if (confirm(`¿Estás seguro de que quieres eliminar el préstamo con ID ${idPrestamo}?`)) {
                 form.submit();
@@ -23,14 +25,12 @@ require '../autenticacion/check_sesion.php';
         // Ocultar o mostrar el botón "Entregar" dependiendo de la fecha de devolución
         function actualizarVisibilidadBotonEntregar() {
             const filas = document.querySelectorAll('table tr');
-            
             filas.forEach(fila => {
                 const celdaFechaDevolucion = fila.querySelector('td:nth-child(5)');
                 const formEntregar = fila.querySelector('form[action="php/procesar_entrega_prestamo.php"]');
 
                 if (celdaFechaDevolucion && formEntregar) {
                     const fechaDevolucion = celdaFechaDevolucion.textContent.trim();
-                    // Mostrar el botón solo si la fecha de devolución está vacía o es "No devuelto"
                     if (!fechaDevolucion || fechaDevolucion === 'No devuelto') {
                         formEntregar.style.display = 'block';
                     } else {
@@ -40,8 +40,45 @@ require '../autenticacion/check_sesion.php';
             });
         }
 
-        // Llamar la función al cargar la página
         document.addEventListener('DOMContentLoaded', actualizarVisibilidadBotonEntregar);
+
+        // Función para filtrar la tabla
+        function filtrarTabla() {
+            let filtro = document.getElementById("buscar").value.toLowerCase();
+            let filas = document.querySelectorAll("table tr:not(:first-child)");
+
+            filas.forEach(fila => {
+                let textoFila = fila.textContent.toLowerCase();
+                fila.style.display = textoFila.includes(filtro) ? "" : "none";
+            });
+        }
+
+        // Función para ordenar columnas de la tabla
+        function ordenarTabla(indiceColumna) {
+            let tabla = document.getElementById("tablaPrestamos");
+            let filas = Array.from(tabla.rows).slice(1); // Ignorar encabezado
+
+            if (columnaOrdenada === indiceColumna) {
+                ordenAscendente = !ordenAscendente;
+            } else {
+                columnaOrdenada = indiceColumna;
+                ordenAscendente = true;
+            }
+
+            filas.sort((a, b) => {
+                let celdaA = a.cells[indiceColumna].textContent.trim().toLowerCase();
+                let celdaB = b.cells[indiceColumna].textContent.trim().toLowerCase();
+                if (celdaA < celdaB) {
+                    return ordenAscendente ? -1 : 1;
+                }
+                if (celdaA > celdaB) {
+                    return ordenAscendente ? 1 : -1;
+                }
+                return 0;
+            });
+
+            filas.forEach(fila => tabla.appendChild(fila)); // Rearrancar filas
+        }
     </script>
 </head>
 <body>
@@ -49,7 +86,6 @@ require '../autenticacion/check_sesion.php';
 
     <main>
         <?php
-        // Mensaje de notificación para el usuario
         if (isset($_SESSION['mensaje'])) {
             echo "<script>alert('" . htmlspecialchars($_SESSION['mensaje']) . "');</script>";
             unset($_SESSION['mensaje']);
@@ -58,13 +94,14 @@ require '../autenticacion/check_sesion.php';
 
         <h1>
             Préstamos
+            <!-- Barra de búsqueda -->
+            <input type="text" id="buscar" placeholder="Buscar en la tabla..." onkeyup="filtrarTabla()">
             <a href="alta_prestamo.php"><button>Agregar Préstamo</button></a>
         </h1>
 
         <?php
         require '../autenticacion/conexion.php';
 
-        // Consulta SQL para obtener los préstamos actuales
         $sql = "SELECT p.id_prestamo, l.titulo AS libro, email AS usuario, p.fecha_prestamo, p.fecha_devolucion
                 FROM prestamos p
                 JOIN libros l ON p.isbn = l.isbn
@@ -72,8 +109,15 @@ require '../autenticacion/check_sesion.php';
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
-            echo "<table border='1'>";
-            echo "<tr><th>ID</th><th>Libro</th><th>Usuario</th><th>Fecha Préstamo</th><th>Fecha Devolución</th><th>Opciones</th></tr>";
+            echo "<table border='1' id='tablaPrestamos'>";
+            echo "<tr>
+                <th onclick='ordenarTabla(0)'>ID</th>
+                <th onclick='ordenarTabla(1)'>Libro</th>
+                <th onclick='ordenarTabla(2)'>Usuario</th>
+                <th onclick='ordenarTabla(3)'>Fecha Préstamo</th>
+                <th onclick='ordenarTabla(4)'>Fecha Devolución</th>
+                <th>Opciones</th>
+            </tr>";
             while($row = $result->fetch_assoc()) {
                 $idPrestamo = htmlspecialchars($row["id_prestamo"]);
                 $tituloLibro = htmlspecialchars($row["libro"]);
