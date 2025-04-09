@@ -2,7 +2,7 @@
     <div>
         <!-- Logo -->
         <link rel="icon" type="image/png" href="../img/logo.png">
-        <h1>Bookclout</h1>
+        <h1><a href="inicio.php">Bookclout</a></h1>
 
         <!-- Opciones -->
 

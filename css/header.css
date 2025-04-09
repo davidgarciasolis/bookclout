@@ -6,7 +6,7 @@ header {
     justify-content: center; /* Centrar el contenido */
     padding: 10px; /* Espacio alrededor */
     align-items: center; /* Alinear verticalmente */
-    width: 100vw; /* Ocupa todo el ancho */
+    width: 100%; /* Ocupa todo el ancho */
 }
 
 header div{
@@ -16,8 +16,10 @@ header div{
     width: 100%;
     max-width: 1200px; /* Máximo ancho del contenido */
 }
-
-
+header div h1 a{
+    text-decoration: none; /*Se quita la decoracion de los enlaces*/
+    color: white
+}
 
 header div ul {
     list-style-type:none;
