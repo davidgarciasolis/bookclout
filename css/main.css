@@ -1,0 +1,138 @@
+/* El contenedor principal del contenido dentro de la etiqueta <main> */
+main {
+    display: flex; /* Utiliza un contenedor flexible para gestionar los elementos internos */
+    flex-direction: column; /* Alinea los elementos (h1 y tabla) en una columna vertical */
+    align-items: center; /* Centra los elementos horizontalmente dentro del contenedor */
+    width: 100%; /* Ocupa el 100% del ancho disponible */
+    max-width: 1200px; /* Limita el ancho máximo del contenedor para mejor legibilidad */
+    margin: 0 auto; /* Centra el contenedor dentro de la página */
+    flex: 1; /* Toma todo el espacio disponible entre el header y el footer */
+}
+
+/* Contenedor del h1 y el botón */
+main h1 {
+    display: flex; /* Activa Flexbox */
+    justify-content: space-between; /* Envía el texto a la izquierda y el botón a la derecha */
+    align-items: center; /* Alinea verticalmente los elementos */
+    width: 100%; /* Asegura que el contenedor ocupe todo el ancho */
+    margin: 10px 0; /* Margen ajustado */
+    font-size: 24px;
+}
+
+
+main h1 button {
+    margin-left: auto; /* Empuja el botón hacia el extremo derecho */
+    background-color: green;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* La tabla dentro del main */
+main table {
+    width: 100%; /* Hace que la tabla ocupe todo el ancho del contenedor */
+    border-collapse: collapse; /* Combina los bordes de las celdas para un diseño más limpio */
+    margin-top: 0; /* Asegura que no haya margen superior innecesario */
+}
+
+/* Estilo para las celdas y encabezados de la tabla */
+main table th, main table td {
+    border: 1px solid #ddd; /* Agrega un borde gris claro alrededor de cada celda */
+    padding: 10px; /* Agrega espacio interior en las celdas para mayor legibilidad */
+    text-align: left; /* Alinea el texto a la izquierda */
+}
+
+/* Estilo para los encabezados de la tabla */
+main table th {
+    background-color: green; /* Aplica un color de fondo claro a los encabezados */
+    color: white; /* Aplica color blanco */
+}
+
+/* Alterna el color de fondo de las filas para mayor claridad visual */
+main table tr:nth-child(even) {
+    background-color: #f9f9f9; /* Aplica un color de fondo claro a las filas pares */
+}
+
+/* Cambia el color de fondo al pasar el ratón sobre una fila */
+main table tr:hover {
+    background-color: #f1f1f1; /* Mejora la interacción visual con un efecto hover */
+}
+
+main table td form {
+    display: inline-block; /* Coloca los formularios (y los botones) en línea */
+    margin: 0 5px; /* Añade un pequeño espacio entre los botones */
+    background-color: #f7f7f7; /* Fondo gris claro */
+    padding: 0px; /* Espaciado interno */
+    border: 2px solid #ddd; /* Borde suave */
+    border-radius: 0px; /* Bordes redondeados */
+    margin: 0px auto; /* Centra el formulario */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+main table td form button {
+    background-color: green; /* Color de fondo */
+    color: white; /* Color del texto */
+    border: none; /* Sin bordes */
+    padding: 5px 10px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cursor tipo "mano" */
+    font-size: 14px; /* Tamaño de texto */
+}
+
+main table td form button:hover {
+    background-color: darkgreen; /* Color al pasar el ratón */
+}
+
+/* Estilo específico para el formulario dentro de <main> */
+main form {
+    background-color: #f7f7f7; /* Fondo gris claro */
+    padding: 20px; /* Espaciado interno */
+    border: 2px solid #ddd; /* Borde suave */
+    border-radius: 8px; /* Bordes redondeados */
+    max-width: 600px; /* Limita el ancho máximo */
+    margin: 20px auto; /* Centra el formulario */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+/* Estiliza los inputs y labels dentro del formulario */
+main form label {
+    font-weight: bold; /* Resalta el texto */
+    margin-bottom: 5px; /* Espaciado inferior */
+}
+
+main form input[type="text"],
+main form input[type="email"],
+main form input[type="password"],
+main form input[type="date"],
+main form input[type="url"],
+main form input[type="textarea"] {
+    width: 100%; /* Haz que los campos ocupen todo el ancho del formulario */
+    padding: 10px; /* Espaciado interno */
+    margin-bottom: 15px; /* Espaciado inferior */
+    border: 1px solid #ccc; /* Borde gris claro */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 16px; /* Tamaño de fuente */
+}
+
+main form input[type="checkbox"] {
+    margin-left: 5px; /* Espaciado entre el texto y el checkbox */
+    display: inline;
+}
+
+/* Estilo para el botón */
+main form button {
+    background-color: #4caf50; /* Verde llamativo */
+    color: white; /* Texto blanco */
+    border: none; /* Sin borde */
+    padding: 10px 15px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cursor tipo "mano" */
+    font-size: 16px; /* Tamaño de fuente */
+}
+
+main form button:hover {
+    background-color: #45a049; /* Verde más oscuro al pasar el ratón */
+}

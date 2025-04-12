@@ -1,0 +1,21 @@
+/* Estilos generales */
+* {
+    margin: 0; /* Elimina el margen por defecto de todos los elementos */
+    padding: 0; /* Elimina el padding por defecto de todos los elementos */
+    box-sizing: border-box; /* Para que el padding y el borde no afecten al tamaño total del elemento */
+    font-family: Arial, Helvetica, sans-serif; /* Cambia la fuente de todos los elementos */
+}
+
+/* Asegurar que la página ocupe toda la altura */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* Altura completa de la ventana */
+}
+
+/* Estructura principal */
+body {
+    display: flex;
+    flex-direction: column; /* Coloca main y footer en columnas */
+    min-height: 100vh; /* Asegura que todo el cuerpo tenga al menos la altura de la ventana */
+}

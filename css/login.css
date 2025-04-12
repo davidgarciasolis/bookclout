@@ -1,0 +1,69 @@
+/* Importa el archivo de estilos "reset.css" para normalizar los estilos predeterminados del navegador */
+@import url("reset.css");
+
+/* Estilos para el cuerpo de la página */
+body {
+    background-color: #f4f4f4; /* Color de fondo de la página */
+    display: flex; /* Utiliza flexbox para alinear los elementos */
+    justify-content: center; /* Centra los elementos horizontalmente */
+    align-items: center; /* Centra los elementos verticalmente */
+    height: 100vh; /* Altura de la página igual a la altura de la ventana */
+}
+
+/* Estilos para el formulario */
+form {
+    background: white; /* Color de fondo del formulario */
+    padding: 20px; /* Espaciado interno entre el borde y el contenido */
+    border-radius: 10px; /* Bordes redondeados del formulario */
+    border: black 1px solid; /* Borde negro de 1px de grosor */
+    width: 400px; /* Ancho fijo del formulario */
+    text-align: center; /* Centra el texto dentro del formulario */
+}
+
+img {
+    width: 100px; /* Ajusta el tamaño según lo que necesites */
+    height: auto; /* Mantiene la proporción de la imagen */
+    display: block; /* Evita espacios extra alrededor de la imagen */
+    margin: 0 auto 20px; /* Centra la imagen y agrega espacio abajo */
+}
+
+
+/* Estilos para el título del formulario */
+h1 {
+    margin-bottom: 20px; /* Espaciado inferior del título */
+    color: green; /* Color del texto del título */
+}
+
+/* Estilos para las etiquetas de los campos del formulario */
+label {
+    display: block; /* Convierte las etiquetas en elementos de bloque */
+    margin: 10px 0 5px; /* Margen superior de 10px, inferior de 5px */
+    text-align: left; /* Alinea el texto de las etiquetas a la izquierda */
+    color: black; /* Color negro para el texto */
+}
+
+/* Estilos para los campos de entrada del formulario */
+input {
+    width: 100%; /* Ancho completo del contenedor */
+    padding: 10px; /* Espaciado interno de 10px */
+    margin-bottom: 10px; /* Margen inferior de 10px */
+    border: 1px solid #ccc; /* Borde gris claro de 1px */
+    border-radius: 5px; /* Bordes redondeados de 5px */
+}
+
+/* Estilos para el botón del formulario */
+button {
+    background-color: #28a745; /* Color de fondo verde */
+    color: white; /* Color del texto blanco */
+    border: none; /* Sin borde */
+    padding: 10px; /* Espaciado interno de 10px */
+    width: 100%; /* Ancho completo del contenedor */
+    border-radius: 5px; /* Bordes redondeados de 5px */
+    cursor: pointer; /* Cambia el cursor a una mano al pasar por encima */
+    font-size: 16px; /* Tamaño de fuente de 16px */
+}
+
+/* Estilos para el botón al pasar el cursor por encima */
+button:hover {
+    background-color: darkgreen; /* Cambia el color de fondo a un verde más oscuro */
+}

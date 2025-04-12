@@ -1,0 +1,41 @@
+/* Header */
+header {
+    background-color: green; /* Color de fondo */
+    color: white; /* Color del texto */
+    display: flex; /* Flexbox para los elementos */
+    justify-content: center; /* Centrar el contenido */
+    padding: 10px; /* Espacio alrededor */
+    align-items: center; /* Alinear verticalmente */
+    width: 100%; /* Ocupa todo el ancho */
+}
+
+header div{
+    display: flex;
+    justify-content: space-between; /* Logo a la izquierda y menú a la derecha */
+    align-items: center;
+    width: 100%;
+    max-width: 1200px; /* Máximo ancho del contenido */
+}
+header div h1 a{
+    text-decoration: none; /*Se quita la decoracion de los enlaces*/
+    color: white
+}
+
+header div ul {
+    list-style-type:none;
+    display: flex;
+}
+
+header div ul li {
+    display: inline;
+    margin-left: 20px;/*Espacio entre los elementos*/
+}
+
+header div ul li a{
+    text-decoration: none; /*Se quita la decoracion de los enlaces*/
+    color: whitesmoke; /* Color blanco oscuro*/
+}
+
+header div ul li a:hover{
+    color: white; /* Color blanco claro para que se ilumine cuando se pone envima */
+}
