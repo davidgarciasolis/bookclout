@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/carousel.css">
 </head>
 <body>
     <!-- header -->
@@ -46,5 +45,7 @@
     <main>
         <?php echo generarCarrusel($genero); ?>
     </main>
+    <!-- Footer -->
+    <?php include 'includes/footer.php'; ?>
 </body>
 </html>
