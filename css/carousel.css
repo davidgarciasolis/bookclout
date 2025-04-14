@@ -1,0 +1,31 @@
+/* Styles for the carousel */
+
+/* Container for the carousel */
+body > main > div {
+    display: flex;
+    overflow-x: auto;
+    gap: 1rem;
+}
+
+/* Ensure each book occupies the same width and height */
+body > main > div > div {
+    flex: 0 0 150px; /* Fixed width for each item */
+    height: 250px; /* Fixed height for each item */
+    text-align: center;
+    box-sizing: border-box; /* Include padding and border in width/height */
+    overflow: hidden; /* Prevent content overflow */
+}
+
+/* Center images and titles within each item */
+body > main > div > div > img {
+    max-width: 100%;
+    max-height: 80%;
+    margin-bottom: 0.5rem;
+}
+
+body > main > div > div > p {
+    margin: 0;
+    font-size: 0.9rem;
+    word-wrap: break-word;
+    overflow: hidden; /* Prevent text overflow */
+}
