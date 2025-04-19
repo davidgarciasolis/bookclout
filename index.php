@@ -7,44 +7,91 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <!-- header -->
-    <?php include 'includes/header.php';?>
+    <!-- Header -->
+    <?php include 'includes/header.php'; ?>
 
-    <?php
-    // Function to generate a carousel for a given genre
-    function generarCarrusel($genero) {
+    <main>
+        <h1>Libros por Género</h1>
+        <?php
+        // Include the database connection
         include 'autenticacion/conexion.php';
 
-        // Query to fetch books of the given genre
-        $query = "SELECT portada, isbn FROM libros WHERE genero = ?";
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param("s", $genero);
-        $stmt->execute();
-        $result = $stmt->get_result();
+        // Query to fetch books grouped by genre
+        $query = "SELECT genero, titulo, portada FROM libros ORDER BY genero, titulo";
+        $result = $conn->query($query);
 
-        // Generate the carousel HTML
-        $html = "<h1>" . htmlspecialchars($genero) . "</h1>";
-        $html .= '<div style="display: flex; overflow-x: auto; gap: 1rem;">';
-        while ($row = $result->fetch_assoc()) {
-            $html .= '<div style="flex: 0 0 150px; height: 250px; text-align: center; box-sizing: border-box; overflow: hidden;">';
-            $html .= '<a href="libro.php?isbn=' . htmlspecialchars($row['isbn']) . '">';
-            $html .= '<img src="' . htmlspecialchars($row['portada']) . '" alt="Portada del libro" style="max-width: 100%; max-height: 80%; margin-bottom: 0.5rem;">';
-            $html .= '</a>';
-            $html .= '</div>';
+        $categorias = [];
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $categorias[$row['genero']][] = $row;
+            }
         }
-        $html .= '</div>';
 
-        $stmt->close();
-        return $html;
+        foreach ($categorias as $genero => $libros) {
+            echo "<section class='carousel'>";
+            echo "<h2>" . htmlspecialchars($genero) . "</h2>";
+            echo "<div class='carousel-container'>";
+
+            foreach ($libros as $libro) {
+                echo "<div class='carousel-item'>";
+                echo "<img src='" . htmlspecialchars($libro['portada']) . "' alt='" . htmlspecialchars($libro['titulo']) . "'>";
+                echo "<p>" . htmlspecialchars($libro['titulo']) . "</p>";
+                echo "</div>";
+            }
+
+            echo "</div>";
+            echo "</section>";
+        }
+
+        $conn->close();
+        ?>
+    </main>
+
+    <style>
+    .carousel {
+        margin: 20px 0;
+        width: 100%;
+        overflow: hidden;
     }
 
-    // Example usage
-    $genero = 'Ficcion';
-    ?>
-    
-    <main>
-        <?php echo generarCarrusel($genero); ?>
-    </main>
+    .carousel-container {
+        display: flex;
+        overflow-x: auto;
+        gap: 10px;
+        scroll-snap-type: x mandatory;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .carousel-item {
+        flex: 0 0 auto;
+        width: calc(100% / 3); /* Adjust to show 3 items at a time */
+        max-width: 300px;
+        text-align: center;
+        scroll-snap-align: start;
+    }
+
+    .carousel-item img {
+        width: 50%; /* Adjusted to occupy half the width */
+        height: auto;
+        border-radius: 5px;
+        margin: 0 auto; /* Center the image */
+    }
+
+    @media (max-width: 768px) {
+        .carousel-item {
+            width: calc(100% / 2); /* Show 2 items on smaller screens */
+        }
+    }
+
+    @media (max-width: 480px) {
+        .carousel-item {
+            width: 100%; /* Show 1 item on very small screens */
+        }
+    }
+    </style>
+
     <!-- Footer -->
     <?php include 'includes/footer.php'; ?>
 </body>
