@@ -7,6 +7,11 @@ main {
     max-width: 1200px; /* Limita el ancho máximo del contenedor para mejor legibilidad */
     margin: 0 auto; /* Centra el contenedor dentro de la página */
     flex: 1; /* Toma todo el espacio disponible entre el header y el footer */
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    font-family: Arial, sans-serif; /* Consistent font */
 }
 
 /* Contenedor del h1 y el botón */
@@ -16,7 +21,9 @@ main h1 {
     align-items: center; /* Alinea verticalmente los elementos */
     width: 100%; /* Asegura que el contenedor ocupe todo el ancho */
     margin: 10px 0; /* Margen ajustado */
-    font-size: 24px;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #444;
 }
 
 
@@ -35,7 +42,8 @@ main h1 button {
 main table {
     width: 100%; /* Hace que la tabla ocupe todo el ancho del contenedor */
     border-collapse: collapse; /* Combina los bordes de las celdas para un diseño más limpio */
-    margin-top: 0; /* Asegura que no haya margen superior innecesario */
+    margin-top: 20px;
+    font-size: 0.9rem; /* Consistent font size */
 }
 
 /* Estilo para las celdas y encabezados de la tabla */
@@ -47,8 +55,9 @@ main table th, main table td {
 
 /* Estilo para los encabezados de la tabla */
 main table th {
-    background-color: green; /* Aplica un color de fondo claro a los encabezados */
-    color: white; /* Aplica color blanco */
+    background-color: #444; /* Aplica un color de fondo oscuro a los encabezados */
+    color: #fff; /* Aplica color blanco */
+    padding: 10px;
 }
 
 /* Alterna el color de fondo de las filas para mayor claridad visual */

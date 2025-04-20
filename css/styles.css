@@ -3,3 +3,116 @@
 @import url("main.css");
 @import url("footer.css");
 @import url("carousel.css");
+
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+h1, h2 {
+    color: #444;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+}
+
+p {
+    margin: 10px 0;
+}
+
+/* Book details section */
+.book-details {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fefefe;
+}
+
+.book-details img {
+    flex-shrink: 0;
+    width: 200px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.book-details-content {
+    flex-grow: 1;
+}
+
+.book-details-content p {
+    margin: 5px 0;
+}
+
+/* Buttons */
+button {
+    padding: 10px 15px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-available {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.btn-available:hover {
+    background-color: #218838;
+}
+
+.btn-unavailable {
+    background-color: #dc3545;
+    color: #fff;
+    cursor: not-allowed;
+}
+
+/* Forms */
+.reservation-form {
+    margin-top: 20px;
+}
+
+/* Header and Footer */
+header, footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+}
+
+header a, footer a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+header a:hover, footer a:hover {
+    text-decoration: underline;
+}

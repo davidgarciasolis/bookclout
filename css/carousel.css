@@ -1,10 +1,14 @@
 /* Styles for the carousel */
 
-/* Container for the carousel */
+/* Ensure consistency with main styles */
 body > main > div {
     display: flex;
     overflow-x: auto;
     gap: 1rem;
+    padding: 10px;
+    background-color: #fefefe;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Ensure each book occupies the same width and height */
@@ -12,6 +16,10 @@ body > main > div > div {
     flex: 0 0 150px; /* Fixed width for each item */
     height: 250px; /* Fixed height for each item */
     text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     box-sizing: border-box; /* Include padding and border in width/height */
     overflow: hidden; /* Prevent content overflow */
 }
@@ -21,11 +29,13 @@ body > main > div > div > img {
     max-width: 100%;
     max-height: 80%;
     margin-bottom: 0.5rem;
+    border-radius: 5px;
 }
 
 body > main > div > div > p {
     margin: 0;
     font-size: 0.9rem;
+    color: #333;
     word-wrap: break-word;
     overflow: hidden; /* Prevent text overflow */
 }

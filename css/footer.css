@@ -1,13 +1,14 @@
 /* Footer fijo al final */
 footer {
-    background-color: black; /* Color de fondo */
-    color: whitesmoke; /* Color del texto */
-    text-align: center; /* Centra el texto */
-    padding: 10px; /* Espaciado interno */
-    width: 100%; /* Ancho completo */
+    background-color: #333; /* Consistent dark background */
+    color: #fff; /* White text for readability */
+    text-align: center;
+    padding: 15px; /* Increased padding for better spacing */
+    border-top: 2px solid #444; /* Subtle border for separation */
+    font-size: 0.9rem; /* Consistent font size */
 }
 
-
 footer h1 {
-    margin: 0; /* Sin margen */
+    margin: 0;
+    font-size: 1.2rem; /* Adjusted font size */
 }

@@ -1,41 +1,41 @@
 /* Header */
 header {
-    background-color: green; /* Color de fondo */
-    color: white; /* Color del texto */
-    display: flex; /* Flexbox para los elementos */
-    justify-content: center; /* Centrar el contenido */
-    padding: 10px; /* Espacio alrededor */
-    align-items: center; /* Alinear verticalmente */
-    width: 100%; /* Ocupa todo el ancho */
-}
-
-header div{
+    background-color: #444; /* Darker shade for consistency */
+    color: #fff;
     display: flex;
-    justify-content: space-between; /* Logo a la izquierda y menú a la derecha */
+    justify-content: center;
+    padding: 15px;
     align-items: center;
     width: 100%;
-    max-width: 1200px; /* Máximo ancho del contenido */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
-header div h1 a{
-    text-decoration: none; /*Se quita la decoracion de los enlaces*/
-    color: white
+
+header div {
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header div h1 a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.5rem; /* Adjusted font size */
 }
 
 header div ul {
-    list-style-type:none;
+    list-style-type: none;
     display: flex;
+    gap: 15px; /* Consistent spacing */
 }
 
-header div ul li {
-    display: inline;
-    margin-left: 20px;/*Espacio entre los elementos*/
+header div ul li a {
+    text-decoration: none;
+    color: #ddd; /* Softer white for links */
+    font-size: 1rem;
 }
 
-header div ul li a{
-    text-decoration: none; /*Se quita la decoracion de los enlaces*/
-    color: whitesmoke; /* Color blanco oscuro*/
-}
-
-header div ul li a:hover{
-    color: white; /* Color blanco claro para que se ilumine cuando se pone envima */
+header div ul li a:hover {
+    color: #fff; /* Bright white on hover */
 }

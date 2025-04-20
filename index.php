@@ -17,7 +17,7 @@
         include 'autenticacion/conexion.php';
 
         // Query to fetch books grouped by genre
-        $query = "SELECT genero, titulo, portada FROM libros ORDER BY genero, titulo";
+        $query = "SELECT genero, titulo, portada, isbn FROM libros ORDER BY genero, titulo";
         $result = $conn->query($query);
 
         $categorias = [];
@@ -35,7 +35,9 @@
 
             foreach ($libros as $libro) {
                 echo "<div class='carousel-item'>";
+                echo "<a href='libro.php?isbn=" . urlencode($libro['isbn']) . "'>";
                 echo "<img src='" . htmlspecialchars($libro['portada']) . "' alt='" . htmlspecialchars($libro['titulo']) . "'>";
+                echo "</a>";
                 echo "<p>" . htmlspecialchars($libro['titulo']) . "</p>";
                 echo "</div>";
             }
