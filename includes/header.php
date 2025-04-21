@@ -1,7 +1,7 @@
 <header>
     <div>
         <!-- Logo -->
-        <link rel="icon" type="image/png" href="img/libro.png">
+        <link rel="icon" type="image/png" href="img/logo.png">
         <h1><a href="index.php">Bookclout</a></h1>
 
         <!-- Opciones -->

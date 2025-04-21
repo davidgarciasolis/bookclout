@@ -1,3 +1,3 @@
 <footer>
-    <h1>Bookclout</h1>
+    <h1><a href="index.php">Bookclout</a></h1>
 </footer>
