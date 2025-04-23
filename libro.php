@@ -65,7 +65,7 @@
                 echo "<p><strong>Descripción:</strong> " . htmlspecialchars($libro['descripcion']) . "</p>";
 
                 if ($unidades_disponibles > 0) {
-                    echo "<form action='manager/php/procesar_reserva.php' method='POST' class='reservation-form'>";
+                    echo "<form action='php/procesar_reserva.php' method='POST' class='reservation-form'>";
                     echo "<p><strong>Unidades disponibles:</strong> " . htmlspecialchars($unidades_disponibles) . "</p>";
                     echo "<input type='hidden' name='isbn' value='" . htmlspecialchars($isbn) . "'>";
                     echo "<button type='submit' class='btn btn-available'>Reservar</button>";
