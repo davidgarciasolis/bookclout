@@ -10,6 +10,7 @@ session_start();
         <!-- Opciones -->
         <ul>
             <li><a href="index.php">Inicio</a></li>
+            <li><a href="catalogo.php">Catalogo</a></li>
             <?php if (isset($_SESSION['email'])): ?>
                 <li><a href="autenticacion/logout_user.php">Cerrar sesión</a></li>
             <?php else: ?>

@@ -79,6 +79,10 @@ button {
     transition: background-color 0.3s ease;
 }
 
+button:hover {
+    opacity: 0.9;
+}
+
 .btn-available {
     background-color: #28a745;
     color: #fff;
@@ -94,9 +98,62 @@ button {
     cursor: not-allowed;
 }
 
+/* Links */
+a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
 /* Forms */
+form {
+    margin: 20px 0;
+}
+
+input[type="text"], input[type="email"], input[type="password"], input[type="date"], input[type="url"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
 .reservation-form {
     margin-top: 20px;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+table th {
+    background-color: #444;
+    color: #fff;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
 }
 
 /* Header and Footer */
