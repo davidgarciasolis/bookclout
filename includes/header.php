@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <header>
     <div>
         <!-- Logo -->
@@ -6,8 +9,12 @@
 
         <!-- Opciones -->
         <ul>
-            <li>Inicio</li>
-            <li>Login</li>
+            <li><a href="index.php">Inicio</a></li>
+            <?php if (isset($_SESSION['email'])): ?>
+                <li><a href="autenticacion/logout_user.php">Cerrar sesión</a></li>
+            <?php else: ?>
+                <li><a href="login.php">Login</a></li>
+            <?php endif; ?>
         </ul>
     </div>
 </header>

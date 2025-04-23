@@ -1,7 +1,11 @@
 <?php
 session_start();
 include '../autenticacion/conexion.php';
-include '../autenticacion/check_sesion.php';
+
+if (!isset($_SESSION["email"])) {
+    header("Location: ../login.php");
+    exit();
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['isbn'])) {
     $isbn = $conn->real_escape_string($_POST['isbn']);
