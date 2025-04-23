@@ -48,7 +48,7 @@
 
                 // Query to calculate available units
                 $query_unidades = "SELECT (libros.unidades - 
-                    (SELECT COUNT(*) FROM reservas WHERE isbn = '$isbn' AND estado = 'activo') - 
+                    (SELECT COUNT(*) FROM reservas WHERE isbn = '$isbn' AND estado = 'activa') - 
                     (SELECT COUNT(*) FROM prestamos WHERE isbn = '$isbn' AND fecha_devolucion IS NULL)) AS unidades_disponibles 
                     FROM libros WHERE isbn = '$isbn'";
                 $result_unidades = $conn->query($query_unidades);
