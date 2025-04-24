@@ -41,6 +41,12 @@ require '../autenticacion/check_sesion.php';
 
         filas.forEach(fila => tabla.appendChild(fila)); // Rearranga las filas
     }
+
+    function confirmarEliminacion(nombreUsuario, form) {
+        if (confirm(`¿Estás seguro de que deseas eliminar al usuario "${nombreUsuario}"?`)) {
+            form.submit();
+        }
+    }
     </script>
 
 </head>
