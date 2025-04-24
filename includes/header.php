@@ -11,6 +11,7 @@ session_start();
         <ul>
             <li><a href="index.php">Inicio</a></li>
             <li><a href="catalogo.php">Catalogo</a></li>
+            <li><a href="reservas_prestamos.php">Reservas y prestamos</a></li>
             <?php if (isset($_SESSION['email'])): ?>
                 <li><a href="autenticacion/logout_user.php">Cerrar sesión</a></li>
             <?php else: ?>
