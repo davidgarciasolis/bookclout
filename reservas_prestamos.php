@@ -25,8 +25,8 @@
         // Include the database connection
         include 'autenticacion/conexion.php';
 
-        // Fetch active reservations
-        $query_reservas = "SELECT titulo, fecha_reserva, estado FROM reservas WHERE email_usuario = ? ORDER BY fecha_reserva DESC";
+        // Fetch active reservations with book covers
+        $query_reservas = "SELECT reservas.isbn, libros.titulo, libros.portada, reservas.fecha_reserva, reservas.estado FROM reservas JOIN libros ON reservas.isbn = libros.isbn WHERE reservas.email_usuario = ? AND reservas.estado = 'activa' ORDER BY reservas.fecha_reserva DESC";
         $stmt_reservas = $conn->prepare($query_reservas);
         $stmt_reservas->bind_param("s", $_SESSION['email']);
         $stmt_reservas->execute();
@@ -35,9 +35,12 @@
         echo "<section>";
         echo "<h2>Reservas Activas</h2>";
         if ($result_reservas->num_rows > 0) {
-            echo "<ul>";
+            echo "<ul style='list-style-type: none; padding: 0;'>";
             while ($row = $result_reservas->fetch_assoc()) {
-                echo "<li>" . htmlspecialchars($row['titulo']) . " - " . htmlspecialchars($row['fecha_reserva']) . " - Estado: " . htmlspecialchars($row['estado']) . "</li>";
+                echo "<li class='book-item'>";
+                echo "<img src='" . htmlspecialchars($row['portada']) . "' alt='Portada de " . htmlspecialchars($row['titulo']) . "'>";
+                echo "<div><strong>Título:</strong> " . htmlspecialchars($row['titulo']) . "<br><strong>Fecha de Reserva:</strong> " . htmlspecialchars($row['fecha_reserva']) . "<br><strong>Estado:</strong> " . htmlspecialchars($row['estado']) . "</div>";
+                echo "</li>";
             }
             echo "</ul>";
         } else {
@@ -45,8 +48,8 @@
         }
         echo "</section>";
 
-        // Fetch active loans
-        $query_prestamos = "SELECT titulo, fecha_prestamo, fecha_devolucion FROM prestamos WHERE email_usuario = ? ORDER BY fecha_prestamo DESC";
+        // Fetch active loans with book covers
+        $query_prestamos = "SELECT prestamos.isbn, libros.titulo, libros.portada, prestamos.fecha_prestamo, prestamos.fecha_devolucion FROM prestamos JOIN libros ON prestamos.isbn = libros.isbn WHERE prestamos.email_usuario = ? AND prestamos.fecha_devolucion IS NULL ORDER BY prestamos.fecha_prestamo DESC";
         $stmt_prestamos = $conn->prepare($query_prestamos);
         $stmt_prestamos->bind_param("s", $_SESSION['email']);
         $stmt_prestamos->execute();
@@ -55,9 +58,12 @@
         echo "<section>";
         echo "<h2>Préstamos Activos</h2>";
         if ($result_prestamos->num_rows > 0) {
-            echo "<ul>";
+            echo "<ul style='list-style-type: none; padding: 0;'>";
             while ($row = $result_prestamos->fetch_assoc()) {
-                echo "<li>" . htmlspecialchars($row['titulo']) . " - Fecha de Préstamo: " . htmlspecialchars($row['fecha_prestamo']) . " - Fecha de Devolución: " . htmlspecialchars($row['fecha_devolucion']) . "</li>";
+                echo "<li class='book-item'>";
+                echo "<img src='" . htmlspecialchars($row['portada']) . "' alt='Portada de " . htmlspecialchars($row['titulo']) . "'>";
+                echo "<div><strong>Título:</strong> " . htmlspecialchars($row['titulo']) . "<br><strong>Fecha de Préstamo:</strong> " . htmlspecialchars($row['fecha_prestamo']) . "<br><strong>Fecha de Devolución:</strong> " . htmlspecialchars($row['fecha_devolucion']) . "</div>";
+                echo "</li>";
             }
             echo "</ul>";
         } else {
@@ -69,26 +75,44 @@
         echo "<section>";
         echo "<h2>Historial</h2>";
 
-        $query_historial = "SELECT titulo, tipo, fecha FROM historial WHERE email_usuario = ? ORDER BY fecha DESC";
+        $query_historial = "SELECT prestamos.isbn, libros.titulo, libros.portada, prestamos.fecha_prestamo FROM prestamos JOIN libros ON prestamos.isbn = libros.isbn WHERE prestamos.email_usuario = ? ORDER BY prestamos.fecha_prestamo DESC";
         $stmt_historial = $conn->prepare($query_historial);
         $stmt_historial->bind_param("s", $_SESSION['email']);
         $stmt_historial->execute();
         $result_historial = $stmt_historial->get_result();
 
         if ($result_historial->num_rows > 0) {
-            echo "<ul>";
+            echo "<ul style='list-style-type: none; padding: 0;'>";
             while ($row = $result_historial->fetch_assoc()) {
-                echo "<li>" . htmlspecialchars($row['titulo']) . " - " . htmlspecialchars($row['tipo']) . " - Fecha: " . htmlspecialchars($row['fecha']) . "</li>";
+                echo "<li class='book-item'>";
+                echo "<img src='" . htmlspecialchars($row['portada']) . "' alt='Portada de " . htmlspecialchars($row['titulo']) . "'>";
+                echo "<div><strong>Título:</strong> " . htmlspecialchars($row['titulo']) . "<br><strong>Fecha de Préstamo:</strong> " . htmlspecialchars($row['fecha_prestamo']) . "</div>";
+                echo "</li>";
             }
             echo "</ul>";
         } else {
-            echo "<p>No tienes historial de reservas o préstamos.</p>";
+            echo "<p>No tienes historial de préstamos.</p>";
         }
 
         echo "</section>";
 
         $conn->close();
         ?>
+        <style>
+            .book-item img {
+                width: 75px;
+                height: 100px;
+                object-fit: cover;
+            }
+            .book-item {
+                display: flex;
+                align-items: center;
+                margin-bottom: 10px;
+            }
+            .book-item div {
+                margin-left: 15px;
+            }
+        </style>
     </main>
 
     <!-- Footer -->
