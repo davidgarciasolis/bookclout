@@ -16,7 +16,7 @@ $result = $stmt->get_result();
 
 if ($row = $result->fetch_assoc()) {
     if (password_verify($contraseña, $row["contraseña"])) {
-        echo json_encode(["token" => generarJWT($row["id"])]);
+        echo json_encode(["token" => generarJWT($row["email"])]);
     } else {
         http_response_code(401);
         echo json_encode(["error" => "Contraseña incorrecta"]);
