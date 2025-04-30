@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['isbn'])) {
     $isbn = $conn->real_escape_string($_POST['isbn']);
     $email = $_SESSION['email'];
     $fecha_creacion = date('Y-m-d H:i:s');
-    $fecha_expiracion = date('Y-m-d H:i:s', strtotime('+7 days'));
+    $fecha_expiracion = date('Y-m-d H:i:s', strtotime('+2 days'));
 
     // Insert the reservation into the database
     $query = "INSERT INTO reservas (isbn, email_usuario, fecha_reserva, fecha_expiracion, estado) VALUES ('$isbn', '$email', '$fecha_creacion', '$fecha_expiracion', 'activa')";

@@ -19,5 +19,5 @@ if (!$decoded) {
     exit;
 }
 
-// Ahora puedes usar $decoded->userId
+// Ahora puedes usar $decoded->userId o $decoded->email
 ?>
