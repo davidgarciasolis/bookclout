@@ -26,7 +26,6 @@ main h1 {
     color: #444;
 }
 
-
 main h1 button {
     margin-left: auto; /* Empuja el botón hacia el extremo derecho */
     background-color: green;
@@ -144,4 +143,59 @@ main form button {
 
 main form button:hover {
     background-color: #45a049; /* Verde más oscuro al pasar el ratón */
+}
+
+/* Estilos para el header */
+.main-header {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    padding: 20px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo a {
+    text-decoration: none;
+    color: #ecf0f1;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.main-nav .nav-list {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    margin: 0;
+    padding: 0;
+}
+
+.main-nav .nav-item a {
+    text-decoration: none;
+    color: #ecf0f1;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.main-nav .nav-item a:hover {
+    color: #3498db;
+}
+
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .main-nav .nav-list {
+        flex-direction: column;
+        gap: 10px;
+    }
 }
