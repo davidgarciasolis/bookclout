@@ -94,7 +94,8 @@ require '../autenticacion/check_sesion.php';
         $sql = "SELECT r.id_reserva, l.titulo, r.fecha_reserva, r.fecha_expiracion, r.estado 
                 FROM reservas r
                 JOIN libros l ON r.isbn = l.isbn
-                WHERE r.email_usuario = '$emailUsuario'";
+                WHERE r.email_usuario = '$emailUsuario'
+                ORDER BY r.fecha_reserva DESC";
 
         $result = $conn->query($sql);
 

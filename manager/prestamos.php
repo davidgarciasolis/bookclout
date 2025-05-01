@@ -105,7 +105,8 @@ require '../autenticacion/check_sesion.php';
         $sql = "SELECT p.id_prestamo, l.titulo AS libro, email AS usuario, p.fecha_prestamo, p.fecha_devolucion
                 FROM prestamos p
                 JOIN libros l ON p.isbn = l.isbn
-                JOIN usuarios u ON p.email_usuario = u.email"; 
+                JOIN usuarios u ON p.email_usuario = u.email
+                ORDER BY p.fecha_prestamo DESC";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
