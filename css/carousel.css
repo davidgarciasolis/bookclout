@@ -15,7 +15,7 @@ body > main > div {
 body > main > div > div {
     flex: 0 0 150px; /* Fixed width for each item */
     height: 250px; /* Fixed height for each item */
-    text-align: center;
+    text-align: left;
     border: 1px solid #ddd;
     border-radius: 8px;
     background-color: #fff;

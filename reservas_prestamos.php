@@ -32,7 +32,7 @@
         $stmt_reservas->execute();
         $result_reservas = $stmt_reservas->get_result();
 
-        echo "<section>";
+        echo "<section style='text-align: left;'>";
         echo "<h2>Reservas Activas</h2>";
         if ($result_reservas->num_rows > 0) {
             echo "<ul style='list-style-type: none; padding: 0;'>";
@@ -49,13 +49,7 @@
         echo "</section>";
 
         // Fetch active loans with book covers
-        $query_prestamos = "SELECT prestamos.isbn, libros.titulo, libros.portada, prestamos.fecha_prestamo, prestamos.fecha_devolucion FROM prestamos JOIN libros ON prestamos.isbn = libros.isbn WHERE prestamos.email_usuario = ? AND prestamos.fecha_devolucion IS NULL ORDER BY prestamos.fecha_prestamo DESC";
-        $stmt_prestamos = $conn->prepare($query_prestamos);
-        $stmt_prestamos->bind_param("s", $_SESSION['email']);
-        $stmt_prestamos->execute();
-        $result_prestamos = $stmt_prestamos->get_result();
-
-        echo "<section>";
+        echo "<section style='text-align: left;'>";
         echo "<h2>Préstamos Activos</h2>";
         if ($result_prestamos->num_rows > 0) {
             echo "<ul style='list-style-type: none; padding: 0;'>";
@@ -72,7 +66,7 @@
         echo "</section>";
 
         // Fetch historical reservations and loans
-        echo "<section>";
+        echo "<section style='text-align: left;'>";
         echo "<h2>Historial</h2>";
 
         $query_historial = "SELECT prestamos.isbn, libros.titulo, libros.portada, prestamos.fecha_prestamo FROM prestamos JOIN libros ON prestamos.isbn = libros.isbn WHERE prestamos.email_usuario = ? ORDER BY prestamos.fecha_prestamo DESC";

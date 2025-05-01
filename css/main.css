@@ -2,7 +2,7 @@
 main {
     display: flex; /* Utiliza un contenedor flexible para gestionar los elementos internos */
     flex-direction: column; /* Alinea los elementos (h1 y tabla) en una columna vertical */
-    align-items: center; /* Centra los elementos horizontalmente dentro del contenedor */
+    /* align-items: center;  Centra los elementos horizontalmente dentro del contenedor */
     width: 100%; /* Ocupa el 100% del ancho disponible */
     max-width: 1200px; /* Limita el ancho máximo del contenedor para mejor legibilidad */
     margin: 0 auto; /* Centra el contenedor dentro de la página */
@@ -12,6 +12,7 @@ main {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     font-family: Arial, sans-serif; /* Consistent font */
+    text-align: left; /* Alinea el texto a la izquierda */
 }
 
 /* Contenedor del h1 y el botón */

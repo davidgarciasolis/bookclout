@@ -137,7 +137,12 @@ $total_pages = ceil($total_books / $limit);
                         </div>
                     <?php endwhile; ?>
                 <?php else: ?>
-                    <p class="no-books">No se han encontrado libros.</p>
+                    <div class="book-item" style="flex-grow: 1; justify-content: center; text-align: center;">
+                        <div class="book-item-content">
+                            <h3>No se han encontrado libros,
+                            Intenta realizar otra búsqueda revisanodo o ajustar los filtros para encontrar una seleccion de libros.</h3>
+                        </div>
+                    </div>
                 <?php endif; ?>
             </div>
 

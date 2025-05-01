@@ -18,7 +18,7 @@ form {
     border-radius: 10px; /* Bordes redondeados del formulario */
     border: 1px solid #ddd; /* Borde gris claro */
     width: 400px; /* Ancho fijo del formulario */
-    text-align: center; /* Centra el texto dentro del formulario */
+    text-align: left; /* Alinea el texto dentro del formulario */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
 }
 

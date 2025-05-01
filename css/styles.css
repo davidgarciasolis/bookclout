@@ -12,6 +12,7 @@ body {
     background-color: #f9f9f9;
     color: #333;
     line-height: 1.6;
+    text-align: left;
 }
 
 main {
@@ -25,6 +26,7 @@ main {
 
 h1, h2 {
     color: #444;
+    text-align: left;
 }
 
 h1 {
@@ -39,6 +41,7 @@ h2 {
 
 p {
     margin: 10px 0;
+    text-align: left;
 }
 
 /* Book details section */
@@ -160,7 +163,7 @@ table tr:hover {
 header, footer {
     background-color: #333;
     color: #fff;
-    text-align: center;
+    text-align: left;
     padding: 10px 0;
 }
 
@@ -172,4 +175,23 @@ header a, footer a {
 
 header a:hover, footer a:hover {
     text-decoration: underline;
+}
+
+/* Lists */
+ul {
+    padding: 0;
+    list-style-type: none;
+}
+
+.book-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.book-item img {
+    width: 75px;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 15px;
 }
