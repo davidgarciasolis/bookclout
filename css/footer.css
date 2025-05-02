@@ -11,4 +11,5 @@ footer {
 footer h1 {
     margin: 0;
     font-size: 1.2rem; /* Adjusted font size */
+    text-align: center;
 }
