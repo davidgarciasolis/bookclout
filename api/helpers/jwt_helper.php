@@ -11,7 +11,7 @@ function generarJWT($userId) {
     $payload = [
         "userId" => $userId,
         "iat" => time(),
-        "exp" => time() + (60 * 60)  // 1 hora
+        "exp" => time() + (60 * 60 * 24)  // 1 dia de expiración
     ];
     return JWT::encode($payload, $jwt_key, 'HS256');
 }
