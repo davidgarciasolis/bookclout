@@ -106,7 +106,7 @@ require '../autenticacion/check_sesion.php';
                 FROM prestamos p
                 JOIN libros l ON p.isbn = l.isbn
                 JOIN usuarios u ON p.email_usuario = u.email
-                ORDER BY p.fecha_prestamo DESC";
+                ORDER BY CASE WHEN p.fecha_devolucion IS NULL THEN 1 ELSE 0 END DESC, p.fecha_devolucion DESC";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {

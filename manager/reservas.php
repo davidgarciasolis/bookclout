@@ -91,7 +91,7 @@ require '../autenticacion/check_sesion.php';
         require '../autenticacion/conexion.php';
 
         $emailUsuario = $_SESSION['email'];
-        $sql = "SELECT r.id_reserva, l.titulo, r.fecha_reserva, r.fecha_expiracion, r.estado 
+        $sql = "SELECT r.id_reserva, l.titulo, r.fecha_reserva, r.fecha_expiracion, r.estado, r.email_usuario 
                 FROM reservas r
                 JOIN libros l ON r.isbn = l.isbn
                 WHERE r.email_usuario = '$emailUsuario'
@@ -103,9 +103,10 @@ require '../autenticacion/check_sesion.php';
             echo "<table border='1' id='tablaReservas'>";
             echo "<tr>
                 <th onclick='ordenarTabla(0)'>Título del Libro</th>
-                <th onclick='ordenarTabla(1)'>Fecha de Reserva</th>
-                <th onclick='ordenarTabla(2)'>Fecha de Expiración</th>
-                <th onclick='ordenarTabla(3)'>Estado</th>
+                <th onclick='ordenarTabla(1)'>Usuario</th>
+                <th onclick='ordenarTabla(2)'>Fecha de Reserva</th>
+                <th onclick='ordenarTabla(3)'>Fecha de Expiración</th>
+                <th onclick='ordenarTabla(4)'>Estado</th>
                 <th>Opciones</th>
             </tr>";
             while ($row = $result->fetch_assoc()) {
@@ -113,9 +114,11 @@ require '../autenticacion/check_sesion.php';
                 $fechaReserva = htmlspecialchars($row["fecha_reserva"]);
                 $fechaExpiracion = htmlspecialchars($row["fecha_expiracion"]);
                 $estado = htmlspecialchars($row["estado"]);
+                $emailUsuarioReserva = htmlspecialchars($row["email_usuario"]);
                 
                 echo "<tr>";
                 echo "<td>$tituloLibro</td>";
+                echo "<td>$emailUsuarioReserva</td>";
                 echo "<td>$fechaReserva</td>";
                 echo "<td>$fechaExpiracion</td>";
                 echo "<td>$estado</td>";
