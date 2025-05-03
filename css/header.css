@@ -7,6 +7,7 @@ header {
     padding: 15px;
     align-items: center;
     width: 100%;
+    height: auto;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
@@ -40,8 +41,21 @@ header div ul li a:hover {
     color: #fff; /* Bright white on hover */
 }
 
-/* Adjusted image size */
-header div img {
-    width: 50px; /* Set a fixed width */
-    height: auto; /* Maintain aspect ratio */
+
+/* Header and Footer */
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: left;
+    padding: 10px 0;
+}
+
+header a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+header a:hover{
+    text-decoration: underline;
 }

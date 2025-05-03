@@ -5,63 +5,6 @@ include 'autenticacion/conexion.php';
 
 <link rel="stylesheet" href="css/styles.css">
 
-<style>
-main {
-    min-height: 100vh; /* Ensures the main content always occupies the full height of the viewport */
-    display: flex;
-    flex-direction: column;
-}
-
-.book-list {
-    flex-grow: 1; /* Ensures the book list takes up available space */
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.book-item {
-    display: flex;
-    align-items: center;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 10px;
-    background-color: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    min-height: 150px; /* Ensures consistent height for all book items */
-}
-
-.book-item img {
-    width: 150px;
-    height: auto;
-    aspect-ratio: 2 / 3;
-    object-fit: cover;
-    border-radius: 5px;
-    margin-right: 20px;
-}
-
-.book-item-content {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-aside {
-    width: 20%;
-    padding: 10px;
-    box-sizing: border-box;
-    min-height: 100%; /* Ensures the filter column matches the height of the content */
-}
-
-.no-books {
-    text-align: center;
-    font-size: 1.5rem;
-    color: #666;
-    margin-top: auto;
-    margin-bottom: auto;
-    width: 100%;
-}
-</style>
 
 <?php
 // Pagination logic

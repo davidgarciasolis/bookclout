@@ -13,3 +13,21 @@ footer h1 {
     font-size: 1.2rem; /* Adjusted font size */
     text-align: center;
 }
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: left;
+    padding: 10px 0;
+}
+
+footer a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
