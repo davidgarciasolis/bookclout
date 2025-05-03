@@ -4,7 +4,6 @@ session_start();
 <header class="main-header">
     <div class="header-container">
         <!-- Logo -->
-        <link rel="icon" type="image/png" href="img/logo.png">
         <h1 class="logo"><a href="index.php">Bookclout</a></h1>
 
         <!-- Opciones -->

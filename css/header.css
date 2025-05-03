@@ -39,3 +39,9 @@ header div ul li a {
 header div ul li a:hover {
     color: #fff; /* Bright white on hover */
 }
+
+/* Adjusted image size */
+header div img {
+    width: 50px; /* Set a fixed width */
+    height: auto; /* Maintain aspect ratio */
+}
