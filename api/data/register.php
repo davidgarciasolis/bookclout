@@ -10,11 +10,12 @@ if (!isset($data->usuario) || !isset($data->password)) {
 }
 
 $usuario = trim($data->usuario);
+$email = $data->email;
 $password = password_hash($data->password, PASSWORD_DEFAULT);
 
 // Validar si ya existe
-$stmt = $db->prepare("SELECT id FROM usuarios WHERE usuario = ?");
-$stmt->execute([$usuario]);
+$stmt = $conn->prepare("SELECT email FROM usuarios WHERE email = ?");
+$stmt->execute([$email]);
 
 if ($stmt->fetch()) {
     http_response_code(409);
@@ -23,8 +24,8 @@ if ($stmt->fetch()) {
 }
 
 // Insertar nuevo usuario
-$stmt = $db->prepare("INSERT INTO usuarios (usuario, password) VALUES (?, ?)");
-$result = $stmt->execute([$usuario, $password]);
+$stmt = $conn->prepare("INSERT INTO usuarios (nombre, email, contraseña) VALUES (?, ?, ?)");
+$result = $stmt->execute([$usuario, $email, $password]);
 
 if ($result) {
     echo json_encode(["mensaje" => "Usuario registrado correctamente"]);
