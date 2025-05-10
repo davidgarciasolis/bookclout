@@ -2,6 +2,7 @@
 require '../../autenticacion/check_sesion.php';
 require '../../autenticacion/conexion.php';
 require '../../vendor/autoload.php';
+require '../../vendor/smtp_config.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -29,15 +30,7 @@ try {
             $mail = new PHPMailer(true);
             try {
                 // Configuración del servidor SMTP
-                $mail->isSMTP();
-                $mail->Host = 'smtp.gmail.com'; // Cambiar por el host SMTP
-                $mail->SMTPAuth = true;
-                $mail->Username = 'bookcloud.no.reply@gmail.com'; // Cambiar por tu correo
-                $mail->Password = 'hzir heql ozut zpht'; // Cambiar por tu contraseña
-                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-                $mail->Port = 587;
-                $mail->SMTPDebug = 0; // Habilitar el modo de depuración para obtener más detalles
-                $mail->Debugoutput = 'error_log'; // Registrar la salida en el log de errores
+                configurarSMTP($mail);
 
                 // Configuración del correo
                 $mail->setFrom('bookcloud.no.reply@gmail.com', 'Bookcloud'); // Cambiar por tu correo y nombre
