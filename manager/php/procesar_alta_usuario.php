@@ -36,7 +36,7 @@ try {
                 $mail->Password = 'hzir heql ozut zpht'; // Cambiar por tu contraseña
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port = 587;
-                $mail->SMTPDebug = 2; // Habilitar el modo de depuración para obtener más detalles
+                $mail->SMTPDebug = 0; // Habilitar el modo de depuración para obtener más detalles
                 $mail->Debugoutput = 'error_log'; // Registrar la salida en el log de errores
 
                 // Configuración del correo
