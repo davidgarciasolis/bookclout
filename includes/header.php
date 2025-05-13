@@ -4,7 +4,7 @@ session_start();
 <header class="main-header">
     <div class="header-container">
         <!-- Logo -->
-        <h1 class="logo"><a href="index.php">Bookclout</a></h1>
+        <h1 class="logo"><a href="index.php">Bookcloud</a></h1>
 
         <!-- Opciones -->
         <nav class="main-nav">

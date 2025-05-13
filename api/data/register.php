@@ -47,7 +47,7 @@ if ($result) {
         $mail->isHTML(true);
         $mail->Subject = 'Activa tu cuenta en Bookcloud';
 
-        $enlace = 'http://localhost:8081/web/activar.php?token=' . $token; // Cambiar por tu dominio real
+        $enlace = 'https://bookcloud.es/activar.php?token=' . $token; // Cambiar por tu dominio real
         $mail->Body = "
             <h1>Hola $usuario!</h1>
             <p>Gracias por registrarte. Haz clic en el siguiente enlace para activar tu cuenta:</p>
