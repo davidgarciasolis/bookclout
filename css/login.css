@@ -70,3 +70,18 @@ button {
 button:hover {
     background-color: #218838; /* Cambia el color de fondo a un verde más oscuro */
 }
+
+/* Estilos para el enlace debajo del botón */
+form p a {
+    display: block; /* Asegura que el enlace ocupe toda la línea */
+    text-align: left; /* Centra el texto del enlace */
+    color: #007bff; /* Color azul para el enlace */
+    text-decoration: none; /* Elimina el subrayado predeterminado */
+    margin-top: 10px; /* Espaciado superior para separar del botón */
+    font-size: 0.9rem; /* Tamaño de fuente ligeramente más pequeño */
+}
+
+form p a:hover {
+    text-decoration: underline; /* Subraya el enlace al pasar el cursor */
+    color: #0056b3; /* Cambia a un azul más oscuro al pasar el cursor */
+}

@@ -28,6 +28,7 @@ session_start(); // Se inicia sesion para comprobar el error
         <label for="contraseña">Contraseña</label>
         <input type="password" name="contraseña" required>
         <button type="submit">Enviar</button>
+        <p><a href="registro.php">Crear una cuenta</a></p>
     </form>
 </body>
 </html>

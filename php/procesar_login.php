@@ -1,44 +1,51 @@
 <?php
-session_start(); // Inicia la sesión para manejar datos entre páginas
-require '../autenticacion/conexion.php'; // Incluye el archivo para la conexión a la base de datos
+require '../autenticacion/conexion.php';
+session_start();
 
-// Verifica si la solicitud se realizó mediante el método POST
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_POST["email"]; // Obtiene el email del usuario enviado desde el formulario
-    $contraseña = $_POST["contraseña"]; // Obtiene la contraseña enviada desde el formulario
+try {
+    $email = $_POST['email'];
+    $contraseña = $_POST['contraseña'];
 
-    // Prepara una consulta SQL para buscar la contraseña y el estado activo del usuario en la base de datos
-    $stmt = $conn->prepare("SELECT contraseña, activo FROM usuarios WHERE email = ?");
-    $stmt->bind_param("s", $email); // Vincula el parámetro del nombre de usuario a la consulta
-    $stmt->execute(); // Ejecuta la consulta
-    $stmt->store_result(); // Almacena el resultado de la consulta
+    $sql = "SELECT id, nombre, contraseña, admin FROM usuarios WHERE email = ? AND activo = 1";
+    $stmt = $conn->prepare($sql);
 
-    // Verifica si se encontró al menos un usuario con el nombre proporcionado
-    if ($stmt->num_rows > 0) {
-        $stmt->bind_result($hashed_password, $activo); // Vincula los resultados de la consulta a las variables
-        $stmt->fetch(); // Obtiene los valores de la contraseña encriptada y el estado activo
+    if ($stmt) {
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-        // Verifica si el usuario está activo
-        if ($activo == 1) {
-            // Verifica si la contraseña proporcionada coincide con la contraseña encriptada almacenada
-            if (password_verify($contraseña, $hashed_password)) {
-                $_SESSION["email"] = $email; // Guarda el nombre de usuario en la sesión
-                header("Location: ../index.php"); // Redirige al usuario a la página principal
-                exit(); // Finaliza la ejecución del script
+        if ($result->num_rows === 1) {
+            $usuario = $result->fetch_assoc();
+
+            if (password_verify($contraseña, $usuario['contraseña'])) {
+                // Inicia sesión y almacena los datos del usuario
+                $_SESSION['usuario_id'] = $usuario['id'];
+                $_SESSION['usuario_nombre'] = $usuario['nombre'];
+                $_SESSION['usuario_admin'] = $usuario['admin'];
+
+                // Redirige al usuario según su rol
+                if ($usuario['admin'] == 1) {
+                    header("Location: ../manager/inicio.php");
+                } else {
+                    header("Location: ../catalogo.php");
+                }
+                exit;
             } else {
-                $_SESSION["error"] = "El usuario o la contraseña es incorrecta"; // Guarda un mensaje de error en la sesión
+                $_SESSION['error'] = "Contraseña incorrecta.";
             }
         } else {
-            $_SESSION["error"] = "La cuenta no está activa. Por favor, contacte al administrador."; // Mensaje de error si el usuario no está activo
+            $_SESSION['error'] = "Usuario no encontrado o cuenta inactiva.";
         }
+
+        $stmt->close();
     } else {
-        $_SESSION["error"] = "El usuario o la contraseña es incorrecta"; // Guarda un mensaje de error si el usuario no existe
+        $_SESSION['error'] = "Error al preparar la consulta.";
     }
-    $stmt->close(); // Cierra la consulta preparada
-    $conn->close(); // Cierra la conexión a la base de datos
+} catch (Exception $e) {
+    $_SESSION['error'] = "Error en el sistema. Por favor, intenta más tarde.";
 }
 
-// Redirige al usuario de vuelta a la página de inicio de sesión
+$conn->close();
 header("Location: ../login.php");
-exit(); // Finaliza la ejecución del script
+exit;
 ?>
