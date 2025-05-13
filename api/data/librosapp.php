@@ -1,6 +1,6 @@
 <?php
 require_once "../../autenticacion/conexion.php";
-require_once "../auth/validate.php"; //Para el toekn
+require_once "../auth/validate.php"; 
 
 header("Content-Type: application/json");
 
