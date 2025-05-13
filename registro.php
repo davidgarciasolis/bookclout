@@ -17,7 +17,7 @@ session_start();
         <!-- Mostrar mensajes de error o éxito -->
         <?php
         if (isset($_SESSION['mensaje'])) {
-            echo "<p style='color:red'>" . $_SESSION['mensaje'] . "</p>";
+            echo "<p style='color:green'>" . $_SESSION['mensaje'] . "</p>";
             unset($_SESSION['mensaje']);
         }
         ?>

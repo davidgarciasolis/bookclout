@@ -1,5 +1,9 @@
 <?php
 require '../autenticacion/conexion.php';
+require '../vendor/autoload.php';
+require '../vendor/smtp_config.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 session_start();
 
 try {
