@@ -48,7 +48,13 @@
         }
         echo "</section>";
 
-        // Fetch active loans with book covers
+        // Fetch active loans with book covers (prestamos activos = fecha_devolucion IS NULL)
+        $query_prestamos = "SELECT prestamos.isbn, libros.titulo, libros.portada, prestamos.fecha_prestamo, prestamos.fecha_devolucion FROM prestamos JOIN libros ON prestamos.isbn = libros.isbn WHERE prestamos.email_usuario = ? AND prestamos.fecha_devolucion IS NULL ORDER BY prestamos.fecha_prestamo DESC";
+        $stmt_prestamos = $conn->prepare($query_prestamos);
+        $stmt_prestamos->bind_param("s", $_SESSION['email']);
+        $stmt_prestamos->execute();
+        $result_prestamos = $stmt_prestamos->get_result();
+
         echo "<section style='text-align: left;'>";
         echo "<h2>Préstamos Activos</h2>";
         if ($result_prestamos->num_rows > 0) {
@@ -56,7 +62,7 @@
             while ($row = $result_prestamos->fetch_assoc()) {
                 echo "<li class='book-item'>";
                 echo "<img src='" . htmlspecialchars($row['portada']) . "' alt='Portada de " . htmlspecialchars($row['titulo']) . "'>";
-                echo "<div><strong>Título:</strong> " . htmlspecialchars($row['titulo']) . "<br><strong>Fecha de Préstamo:</strong> " . htmlspecialchars($row['fecha_prestamo']) . "<br><strong>Fecha de Devolución:</strong> " . htmlspecialchars($row['fecha_devolucion']) . "</div>";
+                echo "<div><strong>Título:</strong> " . htmlspecialchars($row['titulo']) . "<br><strong>Fecha de Préstamo:</strong> " . htmlspecialchars($row['fecha_prestamo']) . "<br><strong>Fecha de Devolución:</strong> Pendiente</div>";
                 echo "</li>";
             }
             echo "</ul>";
@@ -69,7 +75,8 @@
         echo "<section style='text-align: left;'>";
         echo "<h2>Historial</h2>";
 
-        $query_historial = "SELECT prestamos.isbn, libros.titulo, libros.portada, prestamos.fecha_prestamo FROM prestamos JOIN libros ON prestamos.isbn = libros.isbn WHERE prestamos.email_usuario = ? ORDER BY prestamos.fecha_prestamo DESC";
+        // Solo mostrar préstamos que ya fueron devueltos (fecha_devolucion NO es NULL)
+        $query_historial = "SELECT prestamos.isbn, libros.titulo, libros.portada, prestamos.fecha_prestamo, prestamos.fecha_devolucion FROM prestamos JOIN libros ON prestamos.isbn = libros.isbn WHERE prestamos.email_usuario = ? AND prestamos.fecha_devolucion IS NOT NULL ORDER BY prestamos.fecha_prestamo DESC";
         $stmt_historial = $conn->prepare($query_historial);
         $stmt_historial->bind_param("s", $_SESSION['email']);
         $stmt_historial->execute();
@@ -80,7 +87,7 @@
             while ($row = $result_historial->fetch_assoc()) {
                 echo "<li class='book-item'>";
                 echo "<img src='" . htmlspecialchars($row['portada']) . "' alt='Portada de " . htmlspecialchars($row['titulo']) . "'>";
-                echo "<div><strong>Título:</strong> " . htmlspecialchars($row['titulo']) . "<br><strong>Fecha de Préstamo:</strong> " . htmlspecialchars($row['fecha_prestamo']) . "</div>";
+                echo "<div><strong>Título:</strong> " . htmlspecialchars($row['titulo']) . "<br><strong>Fecha de Préstamo:</strong> " . htmlspecialchars($row['fecha_prestamo']) . "<br><strong>Fecha de Devolución:</strong> " . htmlspecialchars($row['fecha_devolucion']) . "</div>";
                 echo "</li>";
             }
             echo "</ul>";
