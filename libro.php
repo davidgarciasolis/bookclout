@@ -10,19 +10,37 @@
         display: flex;
         align-items: flex-start;
         gap: 20px;
+        flex-wrap: wrap; /* Permite que los elementos se ajusten en pantallas pequeñas */
     }
 
     .book-details img {
         flex-shrink: 0;
-        width: 200px; /* Fixed width for all book cover images */
-        height: 300px; /* Fixed height for all book cover images */
-        object-fit: cover; /* Ensures the image fits within the dimensions without distortion */
+        width: 100%; /* Ajusta el ancho al 100% del contenedor */
+        max-width: 200px; /* Máximo ancho para pantallas grandes */
+        height: auto; /* Mantiene la proporción de la imagen */
+        object-fit: cover;
         border-radius: 5px;
         margin: 10px 0;
     }
 
     .book-details-content {
         flex-grow: 1;
+        width: 100%; /* Asegura que el contenido ocupe todo el ancho en pantallas pequeñas */
+    }
+
+    @media (min-width: 768px) {
+        .book-details {
+            flex-wrap: nowrap; /* En pantallas más grandes, los elementos no se ajustan */
+        }
+
+        .book-details img {
+            width: 200px; /* Ancho fijo para pantallas grandes */
+            height: 300px; /* Altura fija para pantallas grandes */
+        }
+
+        .book-details-content {
+            width: auto; /* Ajusta el contenido al espacio disponible */
+        }
     }
     </style>
 </head>
