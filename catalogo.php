@@ -3,125 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catalogo</title>
+    <title>Catálogo de Libros</title>
     <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .search-bar {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .search-bar input, .search-bar select {
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .search-bar button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .search-bar button:hover {
+            background-color: #0056b3;
+        }
+
+        .book-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px;
+        }
+
+        .book-item {
+            text-align: center;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .book-item:hover {
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .book-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .book-item h3 {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+    </style>
 </head>
 <body>
-    
+    <!-- Header -->
+    <?php include 'includes/header.php'; ?>
 
+    <main>
+        <h1>Catálogo de Libros</h1>
 
-<?php
-include 'autenticacion/conexion.php';
-?>
+        <div class="search-bar">
+            <input type="text" id="search" placeholder="Buscar por título...">
+            <select id="genre-filter">
+                <option value="">Todos los géneros</option>
+                <?php
+                include 'autenticacion/conexion.php';
+                $genresQuery = "SELECT DISTINCT genero FROM libros ORDER BY genero";
+                $genresResult = $conn->query($genresQuery);
 
+                if ($genresResult->num_rows > 0) {
+                    while ($genre = $genresResult->fetch_assoc()) {
+                        echo "<option value='" . htmlspecialchars($genre['genero']) . "'>" . htmlspecialchars($genre['genero']) . "</option>";
+                    }
+                }
+                ?>
+            </select>
+            <button onclick="filterBooks()">Buscar</button>
+        </div>
 
+        <div class="book-grid" id="book-grid">
+            <?php
+            $query = "SELECT genero, titulo, portada, isbn FROM libros ORDER BY titulo";
+            $result = $conn->query($query);
 
+            if ($result->num_rows > 0) {
+                while ($book = $result->fetch_assoc()) {
+                    echo "<a href='libro.php?isbn=" . urlencode($book['isbn']) . "' class='book-item' data-genre='" . htmlspecialchars($book['genero']) . "'>";
+                    echo "<img src='" . htmlspecialchars($book['portada']) . "' alt='" . htmlspecialchars($book['titulo']) . "'>";
+                    echo "<h3>" . htmlspecialchars($book['titulo']) . "</h3>";
+                    echo "</a>";
+                }
+            } else {
+                echo "<p>No se ha encontrado ningún libro.</p>";
+            }
 
-<?php
-include 'includes/header.php';
-// Pagination logic
-$limit = 10;
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-$offset = ($page - 1) * $limit;
+            $conn->close();
+            ?>
+        </div>
+    </main>
 
-// Search and filter logic
-$search = isset($_GET['search']) ? $conn->real_escape_string($_GET['search']) : '';
-$selected_genres = isset($_GET['genres']) ? $_GET['genres'] : [];
-$genre_filter = '';
-if (!empty($selected_genres)) {
-    $genre_filter = "AND genero IN ('" . implode("','", array_map([$conn, 'real_escape_string'], $selected_genres)) . "')";
-}
+    <script>
+        function filterBooks() {
+            const searchInput = document.getElementById('search').value.toLowerCase();
+            const genreFilter = document.getElementById('genre-filter').value;
+            const books = document.querySelectorAll('.book-item');
+            let hasVisibleBooks = false;
 
-// Query to fetch books
-$query = "SELECT * FROM libros WHERE titulo LIKE '%$search%' $genre_filter ORDER BY fecha_publicacion DESC LIMIT $limit OFFSET $offset";
-$result = $conn->query($query);
+            books.forEach(book => {
+                const title = book.querySelector('h3').textContent.toLowerCase();
+                const genre = book.getAttribute('data-genre');
 
-// Query to fetch genres
-$genres_query = "SELECT DISTINCT genero FROM libros ORDER BY genero";
-$genres_result = $conn->query($genres_query);
+                if ((title.includes(searchInput) || searchInput === '') && (genre === genreFilter || genreFilter === '')) {
+                    book.style.display = '';
+                    hasVisibleBooks = true;
+                } else {
+                    book.style.display = 'none';
+                }
+            });
 
-// Query to count total books for pagination
-$count_query = "SELECT COUNT(*) as total FROM libros WHERE titulo LIKE '%$search%' $genre_filter";
-$count_result = $conn->query($count_query);
-$total_books = $count_result->fetch_assoc()['total'];
-$total_pages = ceil($total_books / $limit);
-?>
+            const noBooksMessage = document.getElementById('no-books-message');
+            if (!hasVisibleBooks) {
+                if (!noBooksMessage) {
+                    const message = document.createElement('p');
+                    message.id = 'no-books-message';
+                    message.textContent = 'No se ha encontrado ningún libro.';
+                    document.getElementById('book-grid').appendChild(message);
+                }
+            } else if (noBooksMessage) {
+                noBooksMessage.remove();
+            }
+        }
+    </script>
 
-<main>
-    <div style="display: flex;">
-        <!-- Sidebar for genres -->
-        <aside style="width: 20%; padding: 10px;">
-            <h3>Géneros</h3>
-            <form method="GET" action="catalogo.php">
-                <?php while ($genre = $genres_result->fetch_assoc()): ?>
-                    <div>
-                        <input type="checkbox" name="genres[]" value="<?php echo htmlspecialchars($genre['genero']); ?>" <?php echo in_array($genre['genero'], $selected_genres) ? 'checked' : ''; ?>>
-                        <label><?php echo htmlspecialchars($genre['genero']); ?></label>
-                    </div>
-                <?php endwhile; ?>
-                <input type="hidden" name="search" value="<?php echo htmlspecialchars($search); ?>">
-            </form>
-        </aside>
-
-        <!-- Main content -->
-        <section style="width: 80%; padding: 10px;">
-            <h1>Catálogo de Libros</h1>
-
-            <!-- Search bar -->
-            <form method="GET" action="catalogo.php">
-                <input type="text" name="search" placeholder="Buscar libros..." value="<?php echo htmlspecialchars($search); ?>">
-                <?php foreach ($selected_genres as $genre): ?>
-                    <input type="hidden" name="genres[]" value="<?php echo htmlspecialchars($genre); ?>">
-                <?php endforeach; ?>
-                <button type="submit">Buscar</button>
-            </form>
-
-            <!-- Book list -->
-            <div class="book-list">
-                <?php if ($result->num_rows > 0): ?>
-                    <?php while ($book = $result->fetch_assoc()): ?>
-                        <div class="book-item">
-                            <img src="<?php echo htmlspecialchars($book['portada']); ?>" alt="Portada de <?php echo htmlspecialchars($book['titulo']); ?>">
-                            <div class="book-item-content">
-                                <h3><?php echo htmlspecialchars($book['titulo']); ?></h3>
-                                <p><?php echo htmlspecialchars($book['descripcion']); ?></p>
-                                <a href="libro.php?isbn=<?php echo urlencode($book['isbn']); ?>">
-                                    <button type="button" class="btn btn-available">Reservar</button>
-                                </a>
-                            </div>
-                        </div>
-                    <?php endwhile; ?>
-                <?php else: ?>
-                    <div class="book-item" style="flex-grow: 1; justify-content: center; text-align: center;">
-                        <div class="book-item-content">
-                            <h3>No se han encontrado libros,
-                            Intenta realizar otra búsqueda revisanodo o ajustar los filtros para encontrar una seleccion de libros.</h3>
-                        </div>
-                    </div>
-                <?php endif; ?>
-            </div>
-
-            <!-- Pagination -->
-            <div style="margin-top: 20px;">
-                <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-                    <a href="catalogo.php?page=<?php echo $i; ?>&search=<?php echo urlencode($search); ?>&<?php echo http_build_query(['genres' => $selected_genres]); ?>" style="margin: 0 5px; text-decoration: none; <?php echo $i === $page ? 'font-weight: bold;' : ''; ?>">
-                        <?php echo $i; ?>
-                    </a>
-                <?php endfor; ?>
-            </div>
-        </section>
-    </div>
-</main>
-
-<script>
-    document.querySelectorAll('input[name="genres[]"]').forEach(checkbox => {
-        checkbox.addEventListener('change', () => {
-            const form = checkbox.closest('form');
-            form.submit();
-        });
-    });
-</script>
-
-<?php include 'includes/footer.php'; ?>
+    <!-- Footer -->
+    <?php include 'includes/footer.php'; ?>
 </body>
 </html>

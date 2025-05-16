@@ -99,21 +99,7 @@
 
         $conn->close();
         ?>
-        <style>
-            .book-item img {
-                width: 75px;
-                height: 100px;
-                object-fit: cover;
-            }
-            .book-item {
-                display: flex;
-                align-items: center;
-                margin-bottom: 10px;
-            }
-            .book-item div {
-                margin-left: 15px;
-            }
-        </style>
+
     </main>
 
     <!-- Footer -->
