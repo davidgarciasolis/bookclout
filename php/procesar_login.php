@@ -23,13 +23,9 @@ try {
                 $_SESSION['usuario_nombre'] = $usuario['nombre'];
                 $_SESSION['usuario_admin'] = $usuario['admin'];
 
-                // Redirige al usuario según su rol
-                if ($usuario['admin'] == 1) {
-                    header("Location: ../manager/inicio.php");
-                } else {
-                    header("Location: ../catalogo.php");
-                }
-                exit;
+                $_SESSION["email"] = $email; // Guarda el nombre de usuario en la sesión
+                header("Location: ../index.php"); // Redirige al usuario a la página principal
+                exit(); // Finaliza la ejecución del script
             } else {
                 $_SESSION['error'] = "Contraseña incorrecta.";
             }
