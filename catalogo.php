@@ -9,26 +9,34 @@
         .search-bar {
             margin: 20px 0;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             gap: 10px;
+            flex-wrap: nowrap;
         }
 
-        .search-bar input, .search-bar select {
+        .search-bar input, .search-bar select, .search-bar button {
             padding: 10px;
             font-size: 16px;
+            height: 40px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .search-bar select {
+            min-width: 150px;
         }
 
         .search-bar button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #007BFF;
+            background-color: green;
             color: white;
             border: none;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
         .search-bar button:hover {
-            background-color: #0056b3;
+            background-color: darkgreen;
         }
 
         .book-grid {
