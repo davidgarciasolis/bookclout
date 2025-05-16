@@ -6,7 +6,7 @@ try {
     $email = $_POST['email'];
     $contraseña = $_POST['contraseña'];
 
-    $sql = "SELECT id, nombre, contraseña, admin FROM usuarios WHERE email = ? AND activo = 1";
+    $sql = "SELECT email, nombre, contraseña, admin FROM usuarios WHERE email = ? AND activo = 1";
     $stmt = $conn->prepare($sql);
 
     if ($stmt) {
@@ -19,7 +19,7 @@ try {
 
             if (password_verify($contraseña, $usuario['contraseña'])) {
                 // Inicia sesión y almacena los datos del usuario
-                $_SESSION['usuario_id'] = $usuario['id'];
+                $_SESSION['usuario_id'] = $usuario['email'];
                 $_SESSION['usuario_nombre'] = $usuario['nombre'];
                 $_SESSION['usuario_admin'] = $usuario['admin'];
 
