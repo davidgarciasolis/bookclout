@@ -33,6 +33,58 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil de Usuario</title>
     <link rel="stylesheet" href="css/styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        main {
+            max-width: 800px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        main h1 {
+            text-align: center;
+            color: #333;
+        }
+        main p {
+            font-size: 1.1em;
+            color: #555;
+        }
+        main form {
+            all: unset;
+            display: block;
+        }
+        main form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        main form input[type="text"], main form input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        main form button {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        main form button:hover {
+            background-color: darkgreen;
+        }
+    </style>
 </head>
 <body>
     <?php include 'includes/header.php'; ?>
@@ -54,7 +106,7 @@ $conn->close();
             <input type="password" id="nueva_contraseña" name="nueva_contraseña" maxlength="255" required>
             <button type="submit">Cambiar Contraseña</button>
         </form>
-
+        <br>
         <form action="autenticacion/logout_user.php" method="POST">
             <button type="submit">Cerrar Sesión</button>
         </form>
