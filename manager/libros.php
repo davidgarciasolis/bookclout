@@ -74,6 +74,8 @@ require '../autenticacion/check_sesion.php';
 
         <h1>
             Libros
+        </h1>
+        <h1>
             <!-- Barra de búsqueda -->
             <input type="text" id="buscar" placeholder="Buscar en la tabla..." onkeyup="filtrarTabla()">
             <a href="alta_libro.php"><button>Agregar Libro</button></a>

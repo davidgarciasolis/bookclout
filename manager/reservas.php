@@ -31,13 +31,30 @@ require '../autenticacion/check_sesion.php';
 
         // Función para filtrar la tabla
         function filtrarTabla() {
-            let filtro = document.getElementById("buscar").value.toLowerCase();
-            let filas = document.querySelectorAll("table tr:not(:first-child)");
+            let input = document.getElementById("buscar");
+            let filtro = input.value.toLowerCase();
+            let tabla = document.getElementById("tablaReservas");
+            let filas = tabla.getElementsByTagName("tr");
 
-            filas.forEach(fila => {
-                let textoFila = fila.textContent.toLowerCase();
-                fila.style.display = textoFila.includes(filtro) ? "" : "none";
-            });
+            // Iterar sobre las filas de la tabla, omitiendo la fila de encabezado
+            for (let i = 1; i < filas.length; i++) {
+                let celdas = filas[i].getElementsByTagName("td");
+                let mostrarFila = false;
+
+                // Verificar cada celda en la fila
+                for (let j = 0; j < celdas.length; j++) {
+                    if (celdas[j]) {
+                        let textoCelda = celdas[j].textContent || celdas[j].innerText;
+                        if (textoCelda.toLowerCase().indexOf(filtro) > -1) {
+                            mostrarFila = true;
+                            break;
+                        }
+                    }
+                }
+
+                // Mostrar u ocultar la fila según el resultado
+                filas[i].style.display = mostrarFila ? "" : "none";
+            }
         }
 
         // Función para ordenar columnas

@@ -178,3 +178,14 @@ ul {
     object-fit: cover;
     margin-right: 15px;
 }
+
+/* Search bar */
+#buscar {
+    width: 200px; /* Ajusta el tamaño de la barra de búsqueda */
+    padding: 5px;
+    margin: 10px 10px 10px 0; /* Espaciado ajustado para pegar al botón */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    display: inline-block; /* Alineación en línea con el botón */
+}

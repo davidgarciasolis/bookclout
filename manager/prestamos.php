@@ -94,6 +94,8 @@ require '../autenticacion/check_sesion.php';
 
         <h1>
             Préstamos
+        </h1>
+        <h1>
             <!-- Barra de búsqueda -->
             <input type="text" id="buscar" placeholder="Buscar en la tabla..." onkeyup="filtrarTabla()">
             <a href="alta_prestamo.php"><button>Agregar Préstamo</button></a>
