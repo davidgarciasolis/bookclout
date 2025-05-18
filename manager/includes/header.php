@@ -12,7 +12,6 @@
             <li><a href="reservas.php">Reservas</a></li>
             <li><a href="prestamos.php">Prestamos</a></li>
             <li><a href="perfil.php">Mi Perfil</a></li>
-            <li><a href="../autenticacion/logout_manager.php">Cerrar sesión</a></li>
         </ul>
     </div>
 </header>
