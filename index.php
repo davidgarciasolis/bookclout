@@ -68,17 +68,29 @@
 
     .carousel-item {
         flex: 0 0 auto;
-        width: calc(100% / 3); /* Adjust to show 3 items at a time */
+        width: calc(100% / 3); /* Ajustado para mostrar 3 elementos a la vez */
         max-width: 300px;
         text-align: center;
         scroll-snap-align: start;
+        background-color: #f9f9f9; /* Fondo uniforme */
+        border: 1px solid #ddd; /* Borde para separar los elementos */
+        border-radius: 8px; /* Bordes redondeados */
+        padding: 10px; /* Espaciado interno */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para un efecto elegante */
     }
 
     .carousel-item img {
-        width: 50%; /* Adjusted to occupy half the width */
-        height: auto;
-        border-radius: 5px;
-        margin: 0 auto; /* Center the image */
+        width: 100%; /* Ajustado para ocupar todo el ancho del contenedor */
+        height: 200px; /* Altura fija para uniformidad */
+        object-fit: cover; /* Recortar la imagen para que se ajuste al contenedor */
+        border-radius: 5px; /* Bordes redondeados para las imágenes */
+        margin-bottom: 10px; /* Espaciado entre la imagen y el título */
+    }
+
+    .carousel-item p {
+        font-size: 1rem; /* Tamaño de fuente uniforme */
+        color: #333; /* Color de texto consistente */
+        margin: 0; /* Eliminar márgenes adicionales */
     }
 
     @media (max-width: 768px) {
