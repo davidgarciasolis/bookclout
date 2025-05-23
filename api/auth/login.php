@@ -26,7 +26,7 @@ if ($usuario = $result->fetch_assoc()) {
     }
 
     if (password_verify($pass, $usuario["contraseña"])) {
-        $token = generarJWT($usuario["id"], $usuario["email"]);
+        $token = generarJWT($usuario["email"]);
         echo json_encode([
             "success" => true,
             "mensaje" => "Login correcto",
