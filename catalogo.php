@@ -151,6 +151,8 @@
                 noBooksMessage.remove();
             }
         }
+
+        document.getElementById('genre-filter').addEventListener('change', filterBooks);
     </script>
 
     <!-- Footer -->
