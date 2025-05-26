@@ -107,7 +107,7 @@ $conn->close();
             <button type="submit">Cambiar Contraseña</button>
         </form>
         <br>
-        <form action="../autenticacion/logout_manager.php" method="POST">
+        <form action="autenticacion/logout_user.php" method="POST">
             <button type="submit">Cerrar Sesión</button>
         </form>
     </main>
