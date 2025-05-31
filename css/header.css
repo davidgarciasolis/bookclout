@@ -1,6 +1,6 @@
 /* Header */
 header {
-    background-color: #444; /* Darker shade for consistency */
+    background-color: #6c3c1b; 
     color: #fff;
     display: flex;
     justify-content: center;
@@ -8,7 +8,7 @@ header {
     align-items: center;
     width: 100%;
     height: auto;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
 }
 
 header div {
@@ -22,13 +22,13 @@ header div {
 header div h1 a {
     text-decoration: none;
     color: #fff;
-    font-size: 1.5rem; /* Adjusted font size */
+    font-size: 1.5rem; 
 }
 
 header div ul {
     list-style-type: none;
     display: flex;
-    gap: 15px; /* Consistent spacing */
+    gap: 15px; 
 }
 
 header div ul li a {
@@ -38,11 +38,11 @@ header div ul li a {
 }
 
 header div ul li a:hover {
-    color: #fff; /* Bright white on hover */
+    color: #fff; 
 }
 
 
-/* Header and Footer */
+
 header {
     background-color: #333;
     color: #fff;
