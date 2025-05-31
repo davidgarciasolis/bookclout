@@ -40,6 +40,7 @@
                 echo "<li class='book-item'>";
                 echo "<img src='" . htmlspecialchars($row['portada']) . "' alt='Portada de " . htmlspecialchars($row['titulo']) . "'>";
                 echo "<div><strong>Título:</strong> " . htmlspecialchars($row['titulo']) . "<br><strong>Fecha de Reserva:</strong> " . htmlspecialchars($row['fecha_reserva']) . "<br><strong>Estado:</strong> " . htmlspecialchars($row['estado']) . "</div>";
+                echo "<button class='cancelar-btn' onclick='confirmarCancelacion(\"" . $row['isbn'] . "\")'>Cancelar</button>";
                 echo "</li>";
             }
             echo "</ul>";
@@ -101,6 +102,38 @@
         ?>
 
     </main>
+
+    <!-- Modal de confirmación -->
+    <div id="modal-cancelar" class="modal" style="display:none;">
+        <div class="modal-content">
+            <img src="img/zorro_asustado.png" alt="Zorro asustado" style="width: 100px; margin-bottom: 10px;">
+            <p>¿Estás seguro de que quieres cancelar esta reserva?</p>
+            <div class="modal-actions">
+                <button onclick="cancelarReserva()" class="confirmar">Sí, cancelar</button>
+                <button onclick="cerrarModal()" class="cancelar">No</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let isbnAEliminar = null;
+
+        function confirmarCancelacion(isbn) {
+            isbnAEliminar = isbn;
+            document.getElementById('modal-cancelar').style.display = 'flex';
+        }
+
+        function cerrarModal() {
+            document.getElementById('modal-cancelar').style.display = 'none';
+            isbnAEliminar = null;
+        }
+
+        function cancelarReserva() {
+            if (isbnAEliminar) {
+                window.location.href = 'php/procesar_cancelar_reserva.php?isbn=' + encodeURIComponent(isbnAEliminar);
+            }
+        }
+    </script>
 
     <!-- Footer -->
     <?php include 'includes/footer.php'; ?>
