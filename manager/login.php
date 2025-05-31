@@ -12,7 +12,7 @@ session_start(); // Se inicia sesion para comprobar el error
 <body>
     <!-- formulario de login -->
      <form action="php/procesar_login.php" method="POST">
-     <img src="img/fox_icon.png" alt="Zorro lector">
+     <img src="img/favicon.png" alt="Zorro lector">
         <h1>Iniciar sesion</h1>
 
         <!-- Error de inicio de session -->
