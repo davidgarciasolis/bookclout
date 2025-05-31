@@ -4,8 +4,10 @@ session_start();
 <header class="main-header">
     <div class="header-container">
         <!-- Logo -->
-        <h1 class="logo"><a href="index.php">Bookcloud</a></h1>
-
+<h1 class="logo">
+    <img src="img/zorro_web.png" alt="Zorro" style="height: 40px; vertical-align: middle; margin-right: 8px;">
+    <a href="index.php">Bookcloud</a>
+</h1>
         <!-- Opciones -->
         <nav class="main-nav">
             <ul class="nav-list">
