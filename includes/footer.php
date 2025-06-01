@@ -1,21 +1,3 @@
-footer {
-    background-color: #014421; /* Verde bosque */
-    color: white;
-    text-align: center;
-    padding: 20px;
-}
-
-footer h1 {
-    margin: 0;
-    font-size: 1.2rem;
-}
-
-footer a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-footer a:hover {
-    text-decoration: underline;
-}
+<footer>
+    <h1><a href="index.php">Bookcloud</a></h1>
+</footer>

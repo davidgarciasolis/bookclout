@@ -1,29 +1,18 @@
 /* Footer fijo al final */
 footer {
-    background-color: #333; /* Consistent dark background */
-    color: #fff; /* White text for readability */
-    text-align: left;
-    padding: 15px; /* Increased padding for better spacing */
-    border-top: 2px solid #444; /* Subtle border for separation */
-    font-size: 0.9rem; /* Consistent font size */
+    background-color: #014421; /* Verde bosque */
+    color: white;
+    text-align: center;
+    padding: 20px;
 }
 
 footer h1 {
     margin: 0;
-    font-size: 1.2rem; /* Adjusted font size */
-    text-align: center;
-}
-
-/* Footer */
-footer {
-    background-color: #333;
-    color: #fff;
-    text-align: left;
-    padding: 10px 0;
+    font-size: 1.2rem;
 }
 
 footer a {
-    color: #fff;
+    color: white;
     text-decoration: none;
     font-weight: bold;
 }
