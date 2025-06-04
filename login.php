@@ -12,7 +12,7 @@ session_start(); // Se inicia sesion para comprobar el error
 <body>
     <!-- formulario de login -->
      <form action="php/procesar_login.php" method="POST">
-        <img src="img/logo.png" alt="Logo">
+        <img src="img/favicon.png" alt="Logo">
         <h1>Iniciar sesion</h1>
 
         <!-- Error de inicio de session -->
@@ -28,7 +28,7 @@ session_start(); // Se inicia sesion para comprobar el error
         <label for="contraseña">Contraseña</label>
         <input type="password" name="contraseña" required>
         <button type="submit">Iniciar sesion</button>
-        <p style="margin: 10px 0;">¿No tienes cuenta?</p>
+        <label style="margin: 10px 0;">¿No tienes cuenta?</label>
         <button style="margin-top: 10px;" onclick="window.location.href='registro.php'">Crear una cuenta</button>
     </form>
 </body>

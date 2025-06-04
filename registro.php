@@ -12,6 +12,7 @@ session_start();
 </head>
 <body>
     <form action="php/procesar_registro.php" method="POST">
+        <img src="img/favicon.png" alt="Logo">
         <h1>Registro de Usuario</h1>
 
         <!-- Mostrar mensajes de error o éxito -->
