@@ -26,7 +26,7 @@
         include 'autenticacion/conexion.php';
 
         // Fetch active reservations with book covers
-        $query_reservas = "SELECT reservas.isbn, libros.titulo, libros.portada, reservas.fecha_reserva, reservas.estado FROM reservas JOIN libros ON reservas.isbn = libros.isbn WHERE reservas.email_usuario = ? AND reservas.estado = 'activa' ORDER BY reservas.fecha_reserva DESC";
+        $query_reservas = "SELECT reservas.id_reserva, reservas.isbn, libros.titulo, libros.portada, reservas.fecha_reserva, reservas.estado FROM reservas JOIN libros ON reservas.isbn = libros.isbn WHERE reservas.email_usuario = ? AND reservas.estado = 'activa' ORDER BY reservas.fecha_reserva DESC";
         $stmt_reservas = $conn->prepare($query_reservas);
         $stmt_reservas->bind_param("s", $_SESSION['email']);
         $stmt_reservas->execute();
@@ -39,8 +39,8 @@
             while ($row = $result_reservas->fetch_assoc()) {
                 echo "<li class='book-item'>";
                 echo "<img src='" . htmlspecialchars($row['portada']) . "' alt='Portada de " . htmlspecialchars($row['titulo']) . "'>";
-                echo "<div><strong>Título:</strong> " . htmlspecialchars($row['titulo']) . "<br><strong>Fecha de Reserva:</strong> " . htmlspecialchars($row['fecha_reserva']) . "<br><strong>Estado:</strong> " . htmlspecialchars($row['estado']) . "</div>";
-                echo "<button class='cancelar-btn' onclick='confirmarCancelacion(\"" . $row['isbn'] . "\")'>Cancelar</button>";
+                echo "<div><strong>ID Reserva:</strong> " . htmlspecialchars($row['id_reserva']) . "<br><strong>Título:</strong> " . htmlspecialchars($row['titulo']) . "<br><strong>Fecha de Reserva:</strong> " . htmlspecialchars($row['fecha_reserva']) . "<br><strong>Estado:</strong> " . htmlspecialchars($row['estado']) . "</div>";
+                echo "<button class='cancelar-btn' onclick='confirmarCancelacion(\"" . $row['id_reserva'] . "\")'>Cancelar</button>";
                 echo "</li>";
             }
             echo "</ul>";
@@ -98,6 +98,16 @@
 
         echo "</section>";
 
+        // Display feedback message for cancellation status
+        if (isset($_SESSION['cancel_status'])) {
+            if ($_SESSION['cancel_status'] === 'success') {
+                echo "<p style='color: green;'>La reserva se ha cancelado correctamente.</p>";
+            } elseif ($_SESSION['cancel_status'] === 'error') {
+                echo "<p style='color: red;'>Hubo un error al cancelar la reserva. Por favor, inténtalo de nuevo.</p>";
+            }
+            unset($_SESSION['cancel_status']); // Clear the status after displaying
+        }
+
         $conn->close();
         ?>
 
@@ -116,21 +126,21 @@
     </div>
 
     <script>
-        let isbnAEliminar = null;
+        let idReservaAEliminar = null;
 
-        function confirmarCancelacion(isbn) {
-            isbnAEliminar = isbn;
+        function confirmarCancelacion(id_reserva) {
+            idReservaAEliminar = id_reserva;
             document.getElementById('modal-cancelar').style.display = 'flex';
         }
 
         function cerrarModal() {
             document.getElementById('modal-cancelar').style.display = 'none';
-            isbnAEliminar = null;
+            idReservaAEliminar = null;
         }
 
         function cancelarReserva() {
-            if (isbnAEliminar) {
-                window.location.href = 'php/procesar_cancelar_reserva.php?isbn=' + encodeURIComponent(isbnAEliminar);
+            if (idReservaAEliminar) {
+                window.location.href = 'php/procesar_cancelar_reserva.php?id_reserva=' + encodeURIComponent(idReservaAEliminar);
             }
         }
     </script>
